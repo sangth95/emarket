@@ -64,7 +64,7 @@
                         <span class="icon-bar"></span>
                     </a>
                     <div class="navbar-inner">
-                        <a class="brand" href="index.html"><img src="@routes.Assets.versioned("themes/images/logo.png")" alt="Bootsshop"/></a>
+                        <a class="brand" href="@routes.HomeController.index()"><img src="@routes.Assets.versioned("themes/images/logo.png")" alt="Bootsshop"/></a>
                         <form class="form-inline navbar-search" method="post" action="@routes.ProductController.searchProductByForm()" >
                             <input id="srchFld" name="srchFld" class="srchTxt" type="text" />
                             <select class="srchTxt">
@@ -79,7 +79,7 @@
                         </form>
                         <ul id="topMenu" class="nav pull-right">
                             <li class=""><a href="@routes.HomeController.getSpecialOffer()">Specials Offer</a></li>
-                            <li class=""><a href="@routes.HomeController.getDelivery()">Delivery</a></li>
+                            <li class=""><a href="@routes.HomeController.guest_ViewDelivery()">Delivery</a></li>
                             <li class=""><a href="@routes.HomeController.getContact()">Contact</a></li>
                             <li class="">
                                 <a href="#login" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Login</span></a>
@@ -111,18 +111,8 @@
                     </div>
                 </div>
             </div>
-        </div>>
-
-
-
-
-
-
-
-        <!-- Header End====================================================================== --
-
-
-
+        </div>
+        <!-- Header End====================================================================== -->
 
         @* And here's where we render the `Html` object containing
          * the page content. *@

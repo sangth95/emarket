@@ -5,6 +5,7 @@ import models.Product;
 import services.EmarketDataService;
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,7 +21,8 @@ public class EmarketDataServiceImpl implements EmarketDataService {
 
     @Override
     public List<Product> getProducts() {
-        return null;
+        List<Product> productList = new ArrayList<Product>();
+        return productList;
     }
 
     @Override

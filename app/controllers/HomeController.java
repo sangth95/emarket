@@ -47,7 +47,7 @@ public class HomeController extends Controller {
     //get product detail
     public Result getProductDetail(Integer id) {
         Product product = emarketDataService.getProduct(id);
-        return ok(product_detail.render(product));
+        return ok(product_detail.render("product detail",product));
     }
 
     /**
@@ -55,21 +55,21 @@ public class HomeController extends Controller {
      * @return
      */
     public Result guest_ViewCart() {
-        return ok(product_summary.render());
+        return ok(product_summary.render("cart"));
     }
 
     //getSpecialOffer
     public Result getSpecialOffer() {
-        return ok(special_offer.render());
+        return ok(special_offer.render("special offer"));
     }
 
     //getDelivery
-    public Result getDelivery(){
-      return ok(normal.render());
+    public Result guest_ViewDelivery(){
+      return ok(normal.render("view delivery"));
     }
 
     //getContact
     public Result getContact() {
-      return ok(contact.render());
+      return ok(contact.render("contact"));
     }
 }

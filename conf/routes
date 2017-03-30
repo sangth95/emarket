@@ -6,13 +6,13 @@
 
 #HOME CONTROLLER
 GET     /                           controllers.HomeController.index
-GET     /delivery                   controllers.HomeController.getDelivery()
+GET     /delivery                   controllers.HomeController.guest_ViewDelivery()
 GET     /contact                    controllers.HomeController.getContact()
+GET     /cart                       controllers.HomeController.guest_ViewCart()
 
 #PRODUCT CONTROLLER
 GET     /product/:id                controllers.ProductController.product(id: Integer)
 GET     /products                   controllers.ProductController.getProducts()
-GET     /cart                       controllers.HomeController.guest_ViewCart()
 GET     /products/:type             controllers.ProductController.guest_ViewProductListByType(type: String)
 GET     /products/search/:key       controllers.ProductController.guest_SearchProduct(key: String)
 #------

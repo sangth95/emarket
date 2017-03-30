@@ -41,13 +41,13 @@ public class ProductController extends Controller {
         product.setShortDescription(
                 product.getShortDescription().toString().replace("\n", "<br />")
         );
-        return ok(product_detail.render(product));
+        return ok(product_detail.render("product detail",product));
     }
 
     //get product list
     public Result getProducts() {
         Product[] products = emarketDataService.getProducts().toArray(new Product[emarketDataService.getProducts().size()]);
-        return ok(product.render(products));
+        return ok(product.render("nothing", products));
     }
 
     /**
@@ -57,7 +57,7 @@ public class ProductController extends Controller {
      */
     public Result guest_ViewProductListByType(String type) {
         Product[] products = emarketDataService.getProducts().toArray(new Product[emarketDataService.getProducts().size()]);
-        return ok(product.render(products));
+        return ok(product.render("get product list by type", products));
     }
 
     /**
@@ -67,7 +67,7 @@ public class ProductController extends Controller {
      */
     public Result guest_SearchProduct(String key) {
         Product[] products = emarketDataService.getProducts().toArray(new Product[emarketDataService.getProducts().size()]);
-        return ok(product.render(products));
+        return ok(product.render("search product by key", products));
     }
 
     /**
