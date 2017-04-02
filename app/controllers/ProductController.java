@@ -38,10 +38,7 @@ public class ProductController extends Controller {
     @Transactional
     public Result product(Integer id) {
         Product product = emarketDataService.getProduct(id);
-        product.setShortDescription(
-                product.getShortDescription().toString().replace("\n", "<br />")
-        );
-        return ok(product_detail.render("product detail",product));
+        return ok(product_detail.render("Product detail", product));
     }
 
     //get product list

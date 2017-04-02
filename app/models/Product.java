@@ -18,16 +18,17 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "manufacturer")
     private Manufacturer manufacturer;
-    @Column(name="short_description")
+    @Column(name = "short_description")
     private String shortDescription;
     private Integer price;
-    @Column(name="information_detail")
+    @Column(name = "information_detail")
     private String informationDetail;
     private String description;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category", referencedColumnName = "id")
     private Category category;
     private String warranty;
+    private String avatar;
     private String pictures;
 
     public Integer getId() {
@@ -54,6 +55,12 @@ public class Product {
         this.manufacturer = manufacturer;
     }
 
+    public String[] getNormalizedShortDescription() {
+        if (null == shortDescription || shortDescription.isEmpty())
+            return null;
+        return shortDescription.split("\n");
+    }
+
     public String getShortDescription() {
         return shortDescription;
     }
@@ -68,6 +75,20 @@ public class Product {
 
     public void setPrice(Integer price) {
         this.price = price;
+    }
+
+    public Entry[] getNormalizedInformationDetail() {
+        if (null == informationDetail || informationDetail.isEmpty())
+            return null;
+        String[] informationDetailLines = informationDetail.split("\n");
+        Entry[] informationEntries = new Entry[informationDetailLines.length];
+
+        for (int i = 0; i < informationDetailLines.length; ++i) {
+            String[] keyAndValue = informationDetailLines[i].split("\t");
+            informationEntries[i] = new Entry(keyAndValue[0], keyAndValue[1]);
+        }
+
+        return informationEntries;
     }
 
     public String getInformationDetail() {
@@ -102,6 +123,20 @@ public class Product {
         this.warranty = warranty;
     }
 
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public String[] getNormalizedPictures() {
+        if (null == pictures || pictures.isEmpty())
+            return null;
+        return pictures.split("\n");
+    }
+
     public String getPictures() {
         return pictures;
     }
@@ -109,12 +144,4 @@ public class Product {
     public void setPictures(String pictures) {
         this.pictures = pictures;
     }
-
-    public String[] getListShortDetailTable() {
-        String[] desciptionList = shortDescription.split("\n");
-        return desciptionList;
-    }
-
-
-    //public List<Map.Entry>
 }
