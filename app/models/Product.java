@@ -144,4 +144,12 @@ public class Product {
     public void setPictures(String pictures) {
         this.pictures = pictures;
     }
+
+
+
+    public String get50CharsOfDescription() {
+        if (description == null || description.equals(""))
+            return "";
+        return description.substring(0, 50) + "...";
+    }
 }

@@ -42,6 +42,7 @@ public class ProductController extends Controller {
     }
 
     //get product list
+    @Transactional
     public Result getProducts() {
         Product[] products = emarketDataService.getProducts().toArray(new Product[emarketDataService.getProducts().size()]);
         return ok(product.render("nothing", products));
@@ -52,6 +53,7 @@ public class ProductController extends Controller {
      * @param type
      * @return
      */
+    @Transactional
     public Result guest_ViewProductListByType(String type) {
         Product[] products = emarketDataService.getProducts().toArray(new Product[emarketDataService.getProducts().size()]);
         return ok(product.render("get product list by type", products));
@@ -62,6 +64,7 @@ public class ProductController extends Controller {
      * @param key
      * @return
      */
+    @Transactional
     public Result guest_SearchProduct(String key) {
         Product[] products = emarketDataService.getProducts().toArray(new Product[emarketDataService.getProducts().size()]);
         return ok(product.render("search product by key", products));
@@ -71,6 +74,7 @@ public class ProductController extends Controller {
      * post method
      * @return
      */
+    @Transactional
     public Result searchProductByForm() {
         DynamicForm form = formFactory.form().bindFromRequest();
         String key = form.get("srchFld");

@@ -1,6 +1,8 @@
 package controllers;
 
+import dao.ShoppingCartDetail;
 import models.Product;
+import models.ShoppingCart;
 import play.data.FormFactory;
 import play.db.jpa.Transactional;
 import play.mvc.*;
@@ -47,8 +49,11 @@ public class HomeController extends Controller {
      * get cart
      * @return
      */
+    @Transactional
     public Result guest_ViewCart() {
-        return ok(product_summary.render("cart"));
+        ShoppingCart currentShoppingCart = emarketDataService.getShoppingCart("001");
+        ShoppingCartDetail shoppingCartDetail = emarketDataService.getShoppingCartDetail("001");
+        return ok(product_summary.render("cart", currentShoppingCart));
     }
 
     //getSpecialOffer

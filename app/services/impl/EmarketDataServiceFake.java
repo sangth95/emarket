@@ -1,6 +1,8 @@
 package services.impl;
 
+import dao.ShoppingCartDetail;
 import models.Product;
+import models.ShoppingCart;
 import services.EmarketDataService;
 
 import javax.inject.Singleton;
@@ -58,5 +60,15 @@ public class EmarketDataServiceFake implements EmarketDataService {
     @Override
     public Product getProduct(Integer id) {
         return products.stream().filter(product -> id.equals(product.getId())).findFirst().orElse(null);
+    }
+
+    @Override
+    public ShoppingCart getShoppingCart(String id) {
+        return null;
+    }
+
+    @Override
+    public ShoppingCartDetail getShoppingCartDetail(String id) {
+        return new ShoppingCartDetail();
     }
 }
