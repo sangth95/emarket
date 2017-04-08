@@ -21,8 +21,7 @@ public class EmarketDataServiceImpl implements EmarketDataService {
 
     @Override
     public List<Product> getProducts() {
-        List<Product> productList = new ArrayList<Product>();
-        return productList;
+        return productDao.getProductList();
     }
 
     @Override

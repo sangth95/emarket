@@ -26,6 +26,7 @@ public class ProductDao {
     }
 
     public List<Product> getProductList() {
-        return null;
+        List<Product> products = em().createNamedQuery("Product.getAll", Product.class).getResultList();
+        return products;
     }
 }

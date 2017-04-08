@@ -11,6 +11,7 @@ import views.html.*;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import java.util.List;
 
 /**
  * This controller contains an action to handle HTTP requests
@@ -31,20 +32,14 @@ public class HomeController extends Controller {
 
     @Transactional
     public Result index() {
-        //return ok(demo.render("Emarket title", "Welcome to emarket"));
-       Product product = emarketDataService.getProduct(1);
-       return ok(index.render("blah blah", emarketDataService.getProduct(1)));
-    }
-
-
-    //get product detail
-    public Result getProductDetail(Integer id) {
-        Product product = emarketDataService.getProduct(id);
-        return ok(product_detail.render("product detail",product));
+        List<Product> productList = emarketDataService.getProducts();
+        Product[] products = productList.toArray(new Product[productList.size()]);
+        return ok(index.render("Bootshop", products));
     }
 
     /**
      * get cart
+     *
      * @return
      */
     public Result guest_ViewCart() {
@@ -57,12 +52,12 @@ public class HomeController extends Controller {
     }
 
     //getDelivery
-    public Result guest_ViewDelivery(){
-      return ok(normal.render("view delivery"));
+    public Result guest_ViewDelivery() {
+        return ok(normal.render("view delivery"));
     }
 
     //getContact
     public Result getContact() {
-      return ok(contact.render("contact"));
+        return ok(contact.render("contact"));
     }
 }

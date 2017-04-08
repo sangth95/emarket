@@ -15,6 +15,7 @@ import  models.Product;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import javax.swing.text.html.HTML;
+import java.util.List;
 
 
 @Singleton
@@ -38,12 +39,13 @@ public class ProductController extends Controller {
     @Transactional
     public Result product(Integer id) {
         Product product = emarketDataService.getProduct(id);
-        return ok(product_detail.render("Product detail", product));
+        return ok(product_detail.render(product.getName(), product));
     }
 
     //get product list
     public Result getProducts() {
-        Product[] products = emarketDataService.getProducts().toArray(new Product[emarketDataService.getProducts().size()]);
+        List<Product> productList = emarketDataService.getProducts();
+        Product[] products = productList.toArray(new Product[productList.size()]);
         return ok(product.render("nothing", products));
     }
 
@@ -53,7 +55,8 @@ public class ProductController extends Controller {
      * @return
      */
     public Result guest_ViewProductListByType(String type) {
-        Product[] products = emarketDataService.getProducts().toArray(new Product[emarketDataService.getProducts().size()]);
+        List<Product> productList = emarketDataService.getProducts();
+        Product[] products = productList.toArray(new Product[productList.size()]);
         return ok(product.render("get product list by type", products));
     }
 
@@ -63,7 +66,8 @@ public class ProductController extends Controller {
      * @return
      */
     public Result guest_SearchProduct(String key) {
-        Product[] products = emarketDataService.getProducts().toArray(new Product[emarketDataService.getProducts().size()]);
+        List<Product> productList = emarketDataService.getProducts();
+        Product[] products = productList.toArray(new Product[productList.size()]);
         return ok(product.render("search product by key", products));
     }
 
