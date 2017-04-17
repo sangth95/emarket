@@ -2,13 +2,12 @@ package services.impl;
 
 import dao.ProductDao;
 import dao.ShoppingCartDao;
-import dao.ShoppingCartDetail;
+import models.ShoppingCartDetail;
 import models.Product;
 import models.ShoppingCart;
 import services.EmarketDataService;
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,6 +27,7 @@ public class EmarketDataServiceImpl implements EmarketDataService {
 
     @Override
     public List<Product> getProducts() {
+
         return this.productDao.getProductList();
     }
 
@@ -37,12 +37,17 @@ public class EmarketDataServiceImpl implements EmarketDataService {
     }
 
     @Override
+    public List<Product> getProducts(String behavior, String key) {
+        return productDao.getProductList(behavior, key);
+    }
+
+    @Override
     public ShoppingCart getShoppingCart(String id) {
         return shoppingCartDao.getShoppingCart(id);
     }
 
     @Override
-    public ShoppingCartDetail getShoppingCartDetail(String id) {
-        return shoppingCartDao.getShoppingCartDetail();
+    public List<ShoppingCartDetail> getShoppingCartDetail(String id) {
+        return shoppingCartDao.getShoppingCartDetail(id);
     }
 }

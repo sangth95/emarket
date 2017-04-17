@@ -10,6 +10,9 @@ import java.util.Map;
  * Created by An on 2/9/2017.
  */
 @Entity
+@NamedQueries({
+        @NamedQuery(name="Product.getAll", query = "SELECT p FROM Product p")
+})
 public class Product {
     @Id
     @Constraints.Required
