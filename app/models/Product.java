@@ -11,7 +11,15 @@ import java.util.Map;
  */
 @Entity
 @NamedQueries({
-        @NamedQuery(name="Product.getAll", query = "SELECT p FROM Product p")
+        @NamedQuery(name="Product.getAll", query = "SELECT p FROM Product p"),
+
+        @NamedQuery(name = "Product.getByText", query = "SELECT  p " +
+                                                        "FROM Product p " +
+                                                        "WHERE  UPPER(p.name) LIKE UPPER(:keyword)"),
+
+        @NamedQuery(name = "Product.getByCategory", query = "SELECT p " +
+                                                            "FROM Product p " +
+                                                            "WHERE p.category.name = :category")
 })
 public class Product {
     @Id
@@ -148,11 +156,19 @@ public class Product {
         this.pictures = pictures;
     }
 
-
+    public String get50CharsOfName() {
+        if (null == name|| name.equals(""))
+            return "";
+        if (name.length() < 50)
+            return name;
+        return name.substring(0, 50) + "...";
+    }
 
     public String get50CharsOfDescription() {
-        if (description == null || description.equals(""))
+        if (null == description || description.equals(""))
             return "";
+        if (description.length() < 50)
+            return description;
         return description.substring(0, 50) + "...";
     }
 }

@@ -50,4 +50,9 @@ public class EmarketDataServiceImpl implements EmarketDataService {
     public List<ShoppingCartDetail> getShoppingCartDetail(String id) {
         return shoppingCartDao.getShoppingCartDetail(id);
     }
+
+    @Override
+    public void addItemToCart(String cartID, Product product) {
+        shoppingCartDao.addItemToCart(cartID, product);
+    }
 }

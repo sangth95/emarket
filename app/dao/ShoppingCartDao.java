@@ -1,13 +1,13 @@
 package dao;
 
+import models.Product;
 import models.ShoppingCart;
+import models.ShoppingCartDetail;
 
 import javax.inject.Singleton;
+import javax.persistence.Query;
 
-import java.util.ArrayList;
-import java.util.Dictionary;
 import java.util.List;
-import java.util.Map;
 
 import static  play.db.jpa.JPA.em;
 
@@ -21,7 +21,23 @@ public class ShoppingCartDao {
         return em().find(ShoppingCart.class, id);
     }
 
-    public ShoppingCartDetail getShoppingCartDetail() {
-        return null;
+    public List<ShoppingCartDetail> getShoppingCartDetail(String cart_id) {
+        Query query = em().createNamedQuery("ShoppingCartDetail.getByCartId", ShoppingCartDetail.class)
+                .setParameter("cart_id", cart_id);
+
+        List<ShoppingCartDetail> shoppingCartDetailList = query.getResultList();
+        return shoppingCartDetailList;
+    }
+
+    public void addItemToCart(String cartID, Product product) {
+        em().getTransaction().begin();
+        ShoppingCartDetail shoppingCartDetail = new ShoppingCartDetail(
+                cartID,
+                product,
+                1,
+                product.getPrice()
+        );
+        em().persist(shoppingCartDetail);
+        em().getTransaction().commit();
     }
 }

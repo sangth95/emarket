@@ -8,16 +8,22 @@
 GET     /                           controllers.HomeController.index
 GET     /delivery                   controllers.HomeController.guest_ViewDelivery()
 GET     /contact                    controllers.HomeController.getContact()
-GET     /cart                       controllers.HomeController.guest_ViewCart()
+GET     /special_offer              controllers.HomeController.getSpecialOffer()
+#GET     /cart                       controllers.HomeController.guest_ViewCart()
 
 #PRODUCT CONTROLLER
 GET     /product/:id                controllers.ProductController.product(id: Integer)
 GET     /products                   controllers.ProductController.getProducts()
-GET     /products/:type             controllers.ProductController.guest_ViewProductListByType(type: String)
-GET     /products/search/:key       controllers.ProductController.guest_SearchProduct(key: String)
+GET     /products/:categoryName     controllers.ProductController.guest_ViewProductListByCategory(categoryName: String, sortType: String)
+GET     /products/search/:key       controllers.ProductController.guest_SearchProduct(key: String, sortType: String)
 #------
 POST    /products/search            controllers.ProductController.searchProductByForm()
+POST    /product/sort               controllers.ProductController.sortProduct(title: String, categoryName: String)
 
-GET     /special_offer              controllers.HomeController.getSpecialOffer()
+
+#CART CONTROLLER
+GET     /cart                       controllers.CartController.guest_ViewCart()
+
+
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)

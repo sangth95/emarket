@@ -1,9 +1,9 @@
-package dao;
+package models;
+
 
 import play.data.validation.Constraints;
 
 import javax.persistence.*;
-import javax.validation.Constraint;
 
 /**
  * Created by HongSang on 4/6/2017.
@@ -11,16 +11,28 @@ import javax.validation.Constraint;
 
 @Entity
 @Table(name = "shopping_cart_detail")
+
+@NamedQueries({
+
+        @NamedQuery(name = "ShoppingCartDetail.getAll", query = "SELECT scd FROM ShoppingCartDetail scd"),
+
+        @NamedQuery(name = "ShoppingCartDetail.getByCartId", query = "SELECT DISTINCT scd " +
+                                                                 "FROM ShoppingCartDetail scd " +
+                                                                 "WHERE scd.cart_id = :cart_id")
+
+})
+
 public class ShoppingCartDetail {
     @Id
     @Constraints.Required
-    @JoinColumn(name = "shopping_cart", referencedColumnName = "id")
-    @Column(name = "id")
-    private String id;
+    private int id;
 
+    @Column(name = "cart_id")
+    private String cart_id;
 
-    @Column(name = "item_id")
-    private String itemId;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "item_id", foreignKey = @ForeignKey(name = "cart_product_item_pk"))
+    private Product item;
 
     @Column(name = "quatity")
     private int quatity;
@@ -28,20 +40,22 @@ public class ShoppingCartDetail {
     @Column(name = "price")
     private int price;
 
-    public String getId() {
+    public ShoppingCartDetail() {
+    }
+
+    public ShoppingCartDetail(String cart_id, Product item, int quatity, int price) {
+        this.cart_id = cart_id;
+        this.item = item;
+        this.quatity = quatity;
+        this.price = price;
+    }
+
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
-    }
-
-    public String getItemId() {
-        return itemId;
-    }
-
-    public void setItemId(String itemId) {
-        this.itemId = itemId;
     }
 
     public int getQuatity() {
@@ -59,4 +73,22 @@ public class ShoppingCartDetail {
     public void setPrice(int price) {
         this.price = price;
     }
+
+    public String getCart_id() {
+        return cart_id;
+    }
+
+    public void setCart_id(String cart_id) {
+        this.cart_id = cart_id;
+    }
+
+    public Product getItem() {
+        return item;
+    }
+
+    public void setItem(Product item) {
+        this.item = item;
+    }
 }
+
+

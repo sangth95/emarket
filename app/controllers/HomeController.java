@@ -1,6 +1,6 @@
 package controllers;
 
-import dao.ShoppingCartDetail;
+import models.ShoppingCartDetail;
 import models.Product;
 import models.ShoppingCart;
 import play.data.FormFactory;
@@ -12,7 +12,7 @@ import services.ServiceFactory;
 import views.html.*;
 
 import javax.inject.Inject;
-import javax.inject.Singleton;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -37,18 +37,6 @@ public class HomeController extends Controller {
         List<Product> productList = emarketDataService.getProducts();
         Product[] products = productList.toArray(new Product[productList.size()]);
         return ok(index.render("Bootshop", products));
-    }
-
-    /**
-     * get cart
-     *
-     * @return
-     */
-    @Transactional
-    public Result guest_ViewCart() {
-        ShoppingCart currentShoppingCart = emarketDataService.getShoppingCart("001");
-        ShoppingCartDetail shoppingCartDetail = emarketDataService.getShoppingCartDetail("001");
-        return ok(product_summary.render("cart", currentShoppingCart));
     }
 
     //getSpecialOffer

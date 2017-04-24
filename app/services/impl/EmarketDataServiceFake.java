@@ -1,12 +1,11 @@
 package services.impl;
 
-import dao.ShoppingCartDetail;
+import models.ShoppingCartDetail;
 import models.Product;
 import models.ShoppingCart;
 import services.EmarketDataService;
 
 import javax.inject.Singleton;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -63,12 +62,22 @@ public class EmarketDataServiceFake implements EmarketDataService {
     }
 
     @Override
+    public List<Product> getProducts(String behavior, String key) {
+        return null;
+    }
+
+    @Override
     public ShoppingCart getShoppingCart(String id) {
         return null;
     }
 
     @Override
-    public ShoppingCartDetail getShoppingCartDetail(String id) {
-        return new ShoppingCartDetail();
+    public List<ShoppingCartDetail> getShoppingCartDetail(String id) {
+        return null;
+    }
+
+    @Override
+    public void addItemToCart(String cartID, Product product) {
+
     }
 }
