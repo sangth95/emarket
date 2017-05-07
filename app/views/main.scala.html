@@ -28,7 +28,32 @@
         <link rel="apple-touch-icon-precomposed" sizes="72x72" href="@routes.Assets.versioned("themes/images/ico/apple-touch-icon-72-precomposed.png")">
         <link rel="apple-touch-icon-precomposed" href="@routes.Assets.versioned("themes/images/ico/apple-touch-icon-57-precomposed.png")">
         <style type="text/css" id="enject"></style>
+        <script type="text/javascript" src="@routes.Assets.versioned("themes/js/jquery-3.2.1.min.js")"></script>
+        <script type="text/javascript" src='@routes.CartController.javascriptRoutes()'></script>
+        <script type="text/javascript" src="@routes.Assets.versioned("themes/js/main.js")"></script>
     </head>
+
+    <script>
+        $(document).ready(function () {
+            function addToCart(id) {
+                $.ajax({
+                    type : 'POST',
+                    url : "/cart/add",
+                    data : {
+                        item_id : id
+                    },
+                    dataType: "text",
+                    success : function(data) {
+                        alert("Cool!!!");
+                    },
+                    error : function(data) {
+                        alert("Error!!!");
+                    }
+                });
+            }
+        });
+    </script>
+
     <body>
         <div id="header">
             <div class="container">

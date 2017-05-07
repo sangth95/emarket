@@ -17,13 +17,17 @@ import javax.persistence.*;
         @NamedQuery(name = "ShoppingCartDetail.getAll", query = "SELECT scd FROM ShoppingCartDetail scd"),
 
         @NamedQuery(name = "ShoppingCartDetail.getByCartId", query = "SELECT DISTINCT scd " +
-                                                                 "FROM ShoppingCartDetail scd " +
-                                                                 "WHERE scd.cart_id = :cart_id")
-
+                                                                     "FROM ShoppingCartDetail scd " +
+                                                                     "WHERE scd.cart_id = :cart_id"),
+        @NamedQuery(name = "ShoppingCartDetail.getByCartIdAndItemId", query = "SELECT DISTINCT scd " +
+                                                                              "FROM ShoppingCartDetail scd " +
+                                                                              "WHERE scd.cart_id = :cart_id " +
+                                                                              "AND scd.item.id = :item_id")
 })
 
 public class ShoppingCartDetail {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Constraints.Required
     private int id;
 

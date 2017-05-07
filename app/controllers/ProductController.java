@@ -2,31 +2,38 @@ package controllers;
 
 import Helper.Sort;
 import play.data.DynamicForm;
+import play.data.Form;
 import play.data.FormFactory;
 import play.db.jpa.Transactional;
 import play.mvc.*;
 
 
-import services.ProductService;
+import services.EmarketDataService;
+import services.ServiceFactory;
 import views.html.*;
 
 import  models.Product;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import javax.swing.text.html.HTML;
 import java.util.List;
 
 
+@Singleton
 public class ProductController extends Controller {
 
-    private ProductService productService;
+    private EmarketDataService emarketDataService;
 
     private final FormFactory formFactory;
 
+    private Sort sort;
+
     @Inject
-    public ProductController(ProductService productService, FormFactory formFactory) {
-        this.productService = productService;
+    public ProductController(ServiceFactory serviceFactory, FormFactory formFactory, Sort sort) {
+        emarketDataService = serviceFactory.getEmarketDataService();
         this.formFactory = formFactory;
+        this.sort = sort;
     }
 
     /**
@@ -36,14 +43,14 @@ public class ProductController extends Controller {
      */
     @Transactional
     public Result product(Integer id) {
-        Product product = productService.getProduct(id);
+        Product product = emarketDataService.getProduct(id);
         return ok(product_detail.render(product.getName(), product));
     }
 
     //get product list
     @Transactional
     public Result getProducts() {
-        List<Product> productList = productService.getProducts();
+        List<Product> productList = emarketDataService.getProducts();
         Product[] products = productList.toArray(new Product[productList.size()]);
         return ok(product.render("nothing", "", "", products));
     }
@@ -55,17 +62,17 @@ public class ProductController extends Controller {
      */
     @Transactional
     public Result guest_ViewProductListByCategory(String categoryName, String sortType) {
-        List<Product> productList = productService.getProducts("get by category", categoryName);
+        List<Product> productList = emarketDataService.getProducts("get by category", categoryName);
         Product[] products = productList.toArray(new Product[productList.size()]);
 
         if (sortType.equals("Product name A - Z")) {
-            Sort.sortByName(products, 0);
+            sort.sortByName(products, 0);
         } else if (sortType.equals("Product name Z - A")) {
-            Sort.sortByName(products, 1);
+            sort.sortByName(products, 1);
         } else if (sortType.equals("Price Highest first")) {
-            Sort.sortByPrice(products, 1);
+            sort.sortByPrice(products, 1);
         } else if (sortType.equals("Price Lowest first")) {
-            Sort.sortByPrice(products, 0);
+            sort.sortByPrice(products, 0);
         }
 
         return ok(product.render("get product list by category", categoryName, sortType, products));
@@ -78,17 +85,17 @@ public class ProductController extends Controller {
      */
     @Transactional
     public Result guest_SearchProduct(String key, String sortType) {
-        List<Product> productList = productService.getProducts("get all",key);
+        List<Product> productList = emarketDataService.getProducts("get all",key);
         Product[] products = productList.toArray(new Product[productList.size()]);
 
         if (sortType.equals("Product name A - Z")) {
-            Sort.sortByName(products, 0);
+            sort.sortByName(products, 0);
         } else if (sortType.equals("Product name Z - A")) {
-            Sort.sortByName(products, 1);
+            sort.sortByName(products, 1);
         } else if (sortType.equals("Price Highest first")) {
-            Sort.sortByPrice(products, 1);
+            sort.sortByPrice(products, 1);
         } else if (sortType.equals("Price Lowest first")) {
-            Sort.sortByPrice(products, 0);
+            sort.sortByPrice(products, 0);
         }
         return ok(product.render("search product by key", key, sortType, products));
     }

@@ -1,11 +1,17 @@
 package models;
 
+import javax.inject.Inject;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+
+import dao.ShoppingCartDao;
 import play.data.validation.Constraints;
 
 import javax.persistence.*;
 import javax.validation.Constraint;
+import java.util.DoubleSummaryStatistics;
+import java.util.List;
+
 
 /**
  * Created by HongSang on 4/6/2017.
@@ -23,7 +29,6 @@ public class ShoppingCart {
     private String userId;
 
     private String date;
-
 
     public String getId() {
         return id;
@@ -49,4 +54,5 @@ public class ShoppingCart {
     public void setDate(String date) {
         this.date = date;
     }
+
 }

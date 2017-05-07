@@ -6,6 +6,7 @@
 )
 
 @main(title) {
+          <script type="text/javascript" src="@routes.Assets.versioned("themes/js/main.js")"></script>
 
           <div class="span9">
             <ul class="breadcrumb">
@@ -70,7 +71,6 @@
                           <label class="checkbox">
                             <input type="checkbox">  Adds product to compair
                           </label><br/>
-
                           <a href="product_details.html" class="btn btn-large btn-primary"> Add to <i class=" icon-shopping-cart"></i></a>
                           <a href="product_details.html" class="btn btn-large"><i class="icon-zoom-in"></i></a>
 
@@ -97,7 +97,26 @@
                                 @product.get50CharsOfDescription()
                               </p>
                             </div>
-                            <h4 style="text-align:center;"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">@product.getPrice()</a></h4>
+                            <h4 style="text-align:center;">
+                              <a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a>
+                              <a class="btn" onclick="addToCart(@product.getId)">Add to<i class="icon-shopping-cart"></i></a>
+                                <script>
+                                        function addToCart(id) {
+                                            $.ajax({
+                                                type : 'GET',
+                                                url : "/cart/add/"+id,
+                                                dataType: 'json',
+                                                success : function(data) {
+                                                    alert("Cool!!!");
+                                                },
+                                                error : function(data) {
+                                                    alert("Error!!!");
+                                                }
+                                            });
+                                        }
+                              </script>
+                              <a class="btn btn-primary" href="#">@product.getPrice()</a>
+                            </h4>
                         </div>
                       </div>
                     </li>

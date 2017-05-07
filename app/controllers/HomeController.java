@@ -1,15 +1,21 @@
 package controllers;
 
+import models.ShoppingCartDetail;
 import models.Product;
+import models.ShoppingCart;
 import play.data.FormFactory;
 import play.db.jpa.Transactional;
 import play.mvc.*;
 
-import services.ProductService;
+import services.EmarketDataService;
+import services.ServiceFactory;
 import views.html.*;
 
 import javax.inject.Inject;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionStage;
 
 /**
  * This controller contains an action to handle HTTP requests
@@ -18,18 +24,19 @@ import java.util.List;
 
 public class HomeController extends Controller {
 
-    private ProductService productService;
-    private FormFactory formFactory;
+    private EmarketDataService emarketDataService;
+
+    private final FormFactory formFactory;
 
     @Inject
-    public HomeController(ProductService productService, FormFactory formFactory) {
-        this.productService = productService;
+    public HomeController(ServiceFactory serviceFactory, FormFactory formFactory) {
+        emarketDataService = serviceFactory.getEmarketDataService();
         this.formFactory = formFactory;
     }
 
     @Transactional
     public Result index() {
-        List<Product> productList = productService.getProducts();
+        List<Product> productList = emarketDataService.getProducts();
         Product[] products = productList.toArray(new Product[productList.size()]);
         return ok(index.render("Bootshop", products));
     }
@@ -47,5 +54,12 @@ public class HomeController extends Controller {
     //getContact
     public Result getContact() {
         return ok(contact.render("contact"));
+    }
+
+
+    @Transactional
+    public Result guest_addToCart(String cart_id, String item_id, String title) {
+        CompletionStage<ShoppingCart> promiseOfShoppingCart = CompletableFuture.supplyAsync(() -> CartController.addToCart(Integer.parseInt(item_id)));
+        return index();
     }
 }

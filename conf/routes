@@ -23,7 +23,14 @@ POST    /product/sort               controllers.ProductController.sortProduct(ti
 
 #CART CONTROLLER
 GET     /cart                       controllers.CartController.guest_ViewCart()
-
+GET     /add_to_cart                controllers.HomeController.guest_addToCart(cart_id: String, item_id: String, title: String)
+GET     /remove_from_cart           controllers.CartController.guest_RemoveFromCart(cart_id: String, item_id: String)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
+
+
+
+#temple
+GET    /cart/add/:item_id           controllers.CartController.guest_addToCart(item_id: String)
+GET     /javascriptRoutes           controllers.CartController.javascriptRoutes
