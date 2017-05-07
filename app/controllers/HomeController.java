@@ -55,11 +55,4 @@ public class HomeController extends Controller {
     public Result getContact() {
         return ok(contact.render("contact"));
     }
-
-
-    @Transactional
-    public Result guest_addToCart(String cart_id, String item_id, String title) {
-        CompletionStage<ShoppingCart> promiseOfShoppingCart = CompletableFuture.supplyAsync(() -> CartController.addToCart(Integer.parseInt(item_id)));
-        return index();
-    }
 }

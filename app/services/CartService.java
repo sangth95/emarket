@@ -1,6 +1,6 @@
 package services;
 
-import dao.CartDao;
+import dao.ShoppingCartDao;
 import models.Product;
 import models.ShoppingCart;
 import models.ShoppingCartDetail;
@@ -15,10 +15,10 @@ import java.util.List;
 @Singleton
 public class CartService {
 
-    private CartDao shoppingCartDao;
+    private ShoppingCartDao shoppingCartDao;
 
     @Inject
-    public CartService(CartDao shoppingCart) {
+    public CartService(ShoppingCartDao shoppingCartDao) {
         this.shoppingCartDao = shoppingCartDao;
     }
 
@@ -32,5 +32,13 @@ public class CartService {
 
     public void addItemToCart(String cartID, Product product) {
         shoppingCartDao.addItemToCart(cartID, product);
+    }
+
+    public ShoppingCartDetail getShoppingCartDetail(String cart_id, String item_id) {
+        return shoppingCartDao.getShoppingCartDetail(cart_id, item_id);
+    }
+
+    public void removeItemFromCart(String cartID, ShoppingCartDetail shoppingCartDetail) {
+        shoppingCartDao.removeFromCart(cartID, shoppingCartDetail);
     }
 }

@@ -13,7 +13,9 @@ import play.db.jpa.JPAApi;
 import play.db.jpa.Transactional;
 import play.mvc.Controller;
 import play.mvc.Result;
+import services.CartService;
 import services.EmarketDataService;
+import services.ProductService;
 import services.ServiceFactory;
 import views.html.*;
 
@@ -30,16 +32,14 @@ import java.util.concurrent.CompletionStage;
  */
 @Singleton
 public class CartController extends Controller{
-    private static EmarketDataService emarketDataService;
+    private CartService cartService;
+    private ProductService productService;
     private FormFactory formFactory;
 
     @Inject
-    play.libs.concurrent.HttpExecutionContext ec;
-
-
-    @Inject
-    public CartController(ServiceFactory serviceFactory, FormFactory formFactory) {
-        this.emarketDataService = serviceFactory.getEmarketDataService();
+    public CartController(CartService cartService, ProductService productService, FormFactory formFactory) {
+        this.cartService = cartService;
+        this.productService = productService;
         this.formFactory = formFactory;
     }
 
@@ -59,22 +59,22 @@ public class CartController extends Controller{
      */
     @Transactional
     public Result guest_ViewCart() {
-        ShoppingCart currentShoppingCart = emarketDataService.getShoppingCart("001");
-        List<ShoppingCartDetail> shoppingCartDetailList = emarketDataService.getShoppingCartDetail("001");
+        ShoppingCart currentShoppingCart = cartService.getShoppingCart("001");
+        List<ShoppingCartDetail> shoppingCartDetailList = cartService.getShoppingCartDetail("001");
         return ok(shopping_cart.render("cart", currentShoppingCart, shoppingCartDetailList.toArray(new ShoppingCartDetail[shoppingCartDetailList.size()])));
     }
 
 
     @Transactional
     public Result guest_addToCart(String item_id) {
-        CartController.addToCart(Integer.parseInt(item_id));
+        addToCart(Integer.parseInt(item_id));
         return ok();
     }
 
 
     @Transactional
     public Result guest_RemoveFromCart(String cart_id, String item_id) {
-        ShoppingCartDetail shoppingCartDetail = emarketDataService.getShoppingCartDetail(cart_id, item_id);
+        ShoppingCartDetail shoppingCartDetail = cartService.getShoppingCartDetail(cart_id, item_id);
         removeFromCart(shoppingCartDetail);
         return guest_ViewCart();
     }
@@ -82,14 +82,14 @@ public class CartController extends Controller{
 
 
     @Transactional
-    public static ShoppingCart addToCart(int product_id) {
-        Product product = emarketDataService.getProduct(product_id);
-        emarketDataService.addItemToCart("001", product);
-        return emarketDataService.getShoppingCart("001");
+    public ShoppingCart addToCart(int product_id) {
+        Product product = productService.getProduct(product_id);
+        cartService.addItemToCart("001", product);
+        return cartService.getShoppingCart("001");
     }
 
     @Transactional
     public void removeFromCart(ShoppingCartDetail shoppingCartDetail) {
-        emarketDataService.removeItemFromCart("001", shoppingCartDetail);
+        cartService.removeItemFromCart("001", shoppingCartDetail);
     }
 }
