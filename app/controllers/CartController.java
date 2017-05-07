@@ -1,30 +1,20 @@
 package controllers;
 
-import controllers.*;
-import controllers.routes;
 import models.Product;
 import models.ShoppingCart;
 import models.ShoppingCartDetail;
 import play.Routes;
-import play.api.mvc.Call;
-import play.core.j.HttpExecutionContext;
 import play.data.FormFactory;
-import play.db.jpa.JPAApi;
 import play.db.jpa.Transactional;
 import play.mvc.Controller;
 import play.mvc.Result;
 import services.CartService;
-import services.EmarketDataService;
 import services.ProductService;
-import services.ServiceFactory;
 import views.html.*;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.CompletionStage;
 
 
 /**
