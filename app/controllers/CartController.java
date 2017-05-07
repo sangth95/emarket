@@ -6,8 +6,8 @@ import play.data.FormFactory;
 import play.db.jpa.Transactional;
 import play.mvc.Controller;
 import play.mvc.Result;
-import services.EmarketDataService;
-import services.ServiceFactory;
+import services.CartService;
+import services.ProductService;
 import views.html.*;
 
 import javax.inject.Inject;
@@ -17,14 +17,16 @@ import java.util.List;
 /**
  * Created by HongSang on 4/24/2017.
  */
-@Singleton
+
 public class CartController extends Controller{
-    private EmarketDataService emarketDataService;
+    private CartService cartService;
+    private ProductService productService;
     private FormFactory formFactory;
 
     @Inject
-    public CartController(ServiceFactory serviceFactory, FormFactory formFactory) {
-        this.emarketDataService = serviceFactory.getEmarketDataService();
+    public CartController(CartService cartService, ProductService productService, FormFactory formFactory) {
+        this.cartService = cartService;
+        this.productService = productService;
         this.formFactory = formFactory;
     }
 
@@ -35,14 +37,14 @@ public class CartController extends Controller{
     @Transactional
     public Result guest_ViewCart() {
         addToCart();
-        ShoppingCart currentShoppingCart = emarketDataService.getShoppingCart("001");
-        List<ShoppingCartDetail> shoppingCartDetail = emarketDataService.getShoppingCartDetail("001");
+        ShoppingCart currentShoppingCart = cartService.getShoppingCart("001");
+        List<ShoppingCartDetail> shoppingCartDetail = cartService.getShoppingCartDetail("001");
         return ok(shopping_cart.render("cart", currentShoppingCart, shoppingCartDetail.toArray(new ShoppingCartDetail[shoppingCartDetail.size()])));
     }
 
     @Transactional
     public void addToCart() {
-        emarketDataService.addItemToCart("001", emarketDataService.getProduct(10));
+        cartService.addItemToCart("001", productService.getProduct(10));
     }
 
 }

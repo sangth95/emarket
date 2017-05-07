@@ -10,9 +10,8 @@ import java.util.Objects;
  * Created by HongSang on 4/13/2017.
  */
 
-@Singleton
 public class Sort {
-    public void sortByName(Product[] products, int sortType) {
+    public static void sortByName(Product[] products, int sortType) {
         if (sortType == 0) {        //sort name descesding
             for (int i = 0; i < products.length; i++) {
                 for (int j = i + 1; j < products.length; j++) {
@@ -36,7 +35,7 @@ public class Sort {
         }
     }
 
-    public void sortByPrice(Product[] products, int sortType) {
+    public static void sortByPrice(Product[] products, int sortType) {
         if (sortType == 0) {            //asc
             for (int i = 0; i < products.length; i++) {
                 for (int j = i + 1; j < products.length; j++) {

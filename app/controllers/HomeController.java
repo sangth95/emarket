@@ -1,18 +1,14 @@
 package controllers;
 
-import models.ShoppingCartDetail;
 import models.Product;
-import models.ShoppingCart;
 import play.data.FormFactory;
 import play.db.jpa.Transactional;
 import play.mvc.*;
 
-import services.EmarketDataService;
-import services.ServiceFactory;
+import services.ProductService;
 import views.html.*;
 
 import javax.inject.Inject;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,19 +18,18 @@ import java.util.List;
 
 public class HomeController extends Controller {
 
-    private EmarketDataService emarketDataService;
-
-    private final FormFactory formFactory;
+    private ProductService productService;
+    private FormFactory formFactory;
 
     @Inject
-    public HomeController(ServiceFactory serviceFactory, FormFactory formFactory) {
-        emarketDataService = serviceFactory.getEmarketDataService();
+    public HomeController(ProductService productService, FormFactory formFactory) {
+        this.productService = productService;
         this.formFactory = formFactory;
     }
 
     @Transactional
     public Result index() {
-        List<Product> productList = emarketDataService.getProducts();
+        List<Product> productList = productService.getProducts();
         Product[] products = productList.toArray(new Product[productList.size()]);
         return ok(index.render("Bootshop", products));
     }

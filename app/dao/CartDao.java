@@ -16,7 +16,7 @@ import static  play.db.jpa.JPA.em;
  */
 
 @Singleton
-public class ShoppingCartDao {
+public class CartDao {
     public ShoppingCart getShoppingCart(String id) {
         return em().find(ShoppingCart.class, id);
     }
