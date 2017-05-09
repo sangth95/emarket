@@ -1,1 +1,1 @@
- web: target/universal/stage/bin/emarketplay -Dhttp.port=${PORT} -Dplay.evolutions.db.default.autoApply=true -Ddb.default.driver=org.postgresql.Driver -Ddb.default.url=${DATABASE_URL}
+$ target/universal/stage/bin/foo -Dconfig.file=/full/path/to/conf/application-prod.conf
