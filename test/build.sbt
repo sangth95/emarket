@@ -18,4 +18,5 @@ libraryDependencies ++= Seq(
 )
 
 
+enablePlugins(JavaAppPackaging)
 
