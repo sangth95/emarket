@@ -1,4 +1,4 @@
-name := """emarketplay"""
+name := "emarketplay"
 
 version := "1.0-SNAPSHOT"
 
