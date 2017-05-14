@@ -1,0 +1,46 @@
+@import javafx.scene.control.TreeTableColumn.SortType
+@(      title: String,
+        keyword: String,
+        shoppingCartList: Array[ShoppingCart]
+)
+
+@main(title) {
+  <script type="text/javascript" src="@routes.Assets.versioned("themes/js/main.js")"></script>
+
+  <div class="span9">
+    <ul class="breadcrumb">
+      <li><a href="index.html">Home</a> <span class="divider">/</span></li>
+      <li class="active">@keyword</li>
+    </ul>
+    <h3> @keyword <small class="pull-right"> @shoppingCartList.size shopping cart are available </small></h3>
+    <hr class="soft"/>
+    <p>
+      Nowadays the lingerie industry is one of the most successful business spheres.We always stay in touch with the latest fashion tendencies - that is why our goods are so popular and we have a great number of faithful customers all over the country.
+    </p>
+
+    <hr class="soft"/>
+    <br class="clr"/>
+    <div>
+      <div class="tab-pane" id="listView">
+      @for(shoppingCart <- shoppingCartList) {
+        <div class="row">
+          <div class="span5">
+            <h5>@shoppingCart.getDate</h5>
+            <h4 class="pull-left" style="color: #0e90d2">User Id: @shoppingCart.getUserId</h4>
+            <h4 class="pull-right" style="color: #0e90d2">Total Price: @shoppingCart.getTotalPrice</h4>
+            <br class="clr"/>
+          </div>
+          <div class="span2 alignR">
+            <form class="form-horizontal qtyFrm">
+              <a class="btn btn-danger" href="@routes.AdminCartController.admin_ViewShoppingCartDetailOfCart(shoppingCart.getId)">View detail</a>
+            </form>
+          </div>
+        </div>
+        <hr class="soft"/>
+      }
+      </div>
+    </div>
+  </div>
+
+    <!-- MainBody End ============================= -->
+}

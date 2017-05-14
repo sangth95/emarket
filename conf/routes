@@ -23,7 +23,10 @@ POST    /product/sort               controllers.ProductController.sortProduct(ti
 
 #CART CONTROLLER
 GET     /cart                       controllers.CartController.guest_ViewCart()
-GET     /remove_from_cart           controllers.CartController.guest_RemoveFromCart(cart_id: String, item_id: String)
+GET     /remove_from_cart           controllers.CartController.guest_RemoveFromCart(cart_id: Integer, item_id: String)
+GET     /cart/add/:item_id          controllers.CartController.guest_addToCart(item_id: String)
+#------
+POST    /cart/oder                  controllers.CartController.completeOder()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
@@ -31,5 +34,21 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 
 
 #temple
-GET    /cart/add/:item_id           controllers.CartController.guest_addToCart(item_id: String)
 GET     /javascriptRoutes           controllers.CartController.javascriptRoutes
+
+
+
+
+#ADMIN
+GET     /admin/view_all_product     controllers.AdminProductController.admin_ViewAllProduct()
+POST    /admin/product/sort         controllers.AdminProductController.sortProduct(title: String, categoryName: String)
+GET     /admin/remove/:id           controllers.AdminProductController.admin_DeleteProduct(id : Integer)
+GET     /admin/add_new_product      controllers.AdminProductController.admin_AddNewProductPage()
+GET     /admin/update_product/:id   controllers.AdminProductController.admin_UpdateProductPage(id : Integer)
+
+GET     /admin/view_all_cart        controllers.AdminCartController.admin_getAllShoppingCart()
+GET     /admin/cart/:id             controllers.AdminCartController.admin_ViewShoppingCartDetailOfCart(id :  Integer)
+
+#---
+POST    /admin/add_new_product      controllers.AdminProductController.admin_AddNewProduct()
+POST    /admin/update_product       controllers.AdminProductController.admin_UpdateProduct(product_id: Integer)

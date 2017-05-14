@@ -23,8 +23,20 @@ public class ProductService {
         return this.productDao.getProductList();
     }
 
+    public boolean addProduct(Product product) {
+        return productDao.addProduct(product);
+    }
+
+    public boolean removeProduct(int id) {
+        return productDao.removeProduct(id);
+    }
+
     public Product getProduct(Integer id) {
         return productDao.get(id);
+    }
+
+    public boolean updateProduct(int product_id, Product tmp_product) {
+        return productDao.updateProduct(product_id, tmp_product);
     }
 
     public List<Product> getProducts(String behavior, String key) {

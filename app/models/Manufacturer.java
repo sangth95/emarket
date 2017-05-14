@@ -16,6 +16,13 @@ public class Manufacturer {
     private String name;
     private String description;
 
+    public Manufacturer(Integer id) {
+        this.id = id;
+    }
+
+    public Manufacturer() {
+    }
+
     public Integer getId() {
         return id;
     }

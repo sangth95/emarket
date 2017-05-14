@@ -22,7 +22,10 @@ import java.util.Map;
                                                             "WHERE p.category.name = :category")
 })
 public class Product {
+
+    @TableGenerator(name = "product_gen", table = "id_gen", pkColumnName = "gen_name", valueColumnName = "gen_val", allocationSize = 100)
     @Id
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "product_gen")
     @Constraints.Required
     private Integer id;
     private String name;
@@ -170,5 +173,20 @@ public class Product {
         if (description.length() < 50)
             return description;
         return description.substring(0, 50) + "...";
+    }
+
+    public String getStringPrice() {
+        String str = "";
+        int tmpPrice = this.price;
+        int ctr = 0;
+        while(tmpPrice > 0) {
+            ctr++;
+            str = (tmpPrice%10) + str;
+            tmpPrice /= 10;
+            if (ctr%3 == 0) str = "," + str;
+        }
+
+        if (str.charAt(0) == ',') str.substring(1);
+        return str;
     }
 }

@@ -1,0 +1,94 @@
+@import javafx.scene.control.TreeTableColumn.SortType
+@(      title: String,
+        keyword: String,
+        sortType: String,
+        products : Array[models.Product]
+)
+
+@main(title) {
+  <script type="text/javascript" src="@routes.Assets.versioned("themes/js/main.js")"></script>
+
+  <div class="span9">
+    <ul class="breadcrumb">
+      <li><a href="index.html">Home</a> <span class="divider">/</span></li>
+      <li class="active">@keyword</li>
+    </ul>
+    <h3> @keyword <small class="pull-right"> @products.size products are available </small></h3>
+    <hr class="soft"/>
+    <p>
+      Nowadays the lingerie industry is one of the most successful business spheres.We always stay in touch with the latest fashion tendencies - that is why our goods are so popular and we have a great number of faithful customers all over the country.
+    </p>
+
+    <a class="btn btn-success pull-right" href="@routes.AdminProductController.admin_AddNewProductPage()">Add new <i class="icon-plus"></i></a><br/>
+
+    <hr class="soft"/>
+    <form class="form-horizontal span6" action="@routes.AdminProductController.sortProduct(title, keyword)" method="post">
+      <div class="control-group">
+        <label class="control-label alignL">Sort By </label>
+        <select name="sortType" onchange="this.form.submit()" >
+        @defining(new ArrayList[String]()) { myArray =>
+          @{
+            myArray.add("Product name A - Z")
+            myArray.add("Product name Z - A")
+            myArray.add("Price Highest first")
+            myArray.add("Price Lowest first")
+          }
+
+          @for(s <- myArray) {
+            @if(sortType.equals(s)){
+              <option selected>@s</option>
+            } else {
+              <option>@s</option>
+            }
+          }
+        }
+        </select>
+      </div>
+    </form>
+    <br class="clr"/>
+    <div>
+      <div class="tab-pane" id="listView">
+      @for(product <- products) {
+        <div class="row">
+          <div class="span2">
+            <img src="@routes.Assets.versioned("images/products/")@product.getAvatar()" alt=""/>
+          </div>
+          <div class="span5">
+            <h5>@product.get50CharsOfName()</h5>
+            <hr class="soft"/>
+            <p>
+            @product.get50CharsOfDescription()
+            </p>
+            <h4 class="pull-left" style="color: #0e90d2">Price: @product.getStringPrice() VND</h4>
+            <a class="btn btn-small pull-right" href="@routes.ProductController.product(product.getId())">View Details</a>
+            <br class="clr"/>
+          </div>
+          <div class="span2 alignR">
+            <form class="form-horizontal qtyFrm">
+              <a class="btn btn-primary" href="@routes.AdminProductController.admin_UpdateProductPage(product.getId)">Update</a>
+              <a class="btn btn-danger" href="@routes.AdminProductController.admin_DeleteProduct(product.getId)">Delete</a>
+            </form>
+          </div>
+        </div>
+        <hr class="soft"/>
+      }
+      </div>
+    </div>
+
+    <a href="compair.html" class="btn btn-large pull-right">Compair Product</a>
+    <div class="pagination">
+      <ul>
+        <li><a href="#">&lsaquo;</a></li>
+        <li><a href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li><a href="#">...</a></li>
+        <li><a href="#">&rsaquo;</a></li>
+      </ul>
+    </div>
+    <br class="clr"/>
+  </div>
+
+    <!-- MainBody End ============================= -->
+}

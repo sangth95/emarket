@@ -18,6 +18,13 @@ public class Category {
     @JoinColumn(name = "branch")
     private Branch branch;
 
+    public Category() {
+    }
+
+    public Category(Integer id) {
+        this.id = id;
+    }
+
     public Integer getId() {
         return id;
     }

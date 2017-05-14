@@ -1,0 +1,111 @@
+@(title : String, result : String)
+
+@main(title) {
+  <div class="span9">
+    <ul class="breadcrumb">
+      <li><a href="index.html">Admin</a> <span class="divider">/</span></li>
+      <li class="active">Create New Product</li>
+    </ul>
+    <h3> Create New Product</h3>
+    <div class="breadcrumb">
+
+      <form class="form-horizontal" action="@routes.AdminProductController.admin_AddNewProduct()" method="post" enctype="multipart/form-data">
+        <div class="control-group">
+          <label class="control-label" for="inputName">Name <span class="text-error">(*)</span></label>
+          <div class="controls">
+            <input class="span5" type="text" name="inputName" id="inputName" placeholder="Name">
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label">Manufacture <span class="text-error">(*)</span></label>
+          <div class="controls">
+            <select class="span1" name="inputManufacture" id="inputManufacture">
+              <option value="">-</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label" for="short description">Short Description <span class="text-error">(*)</span></label>
+          <div class="controls">
+            <textarea class="span5" style="height: 100px" name="inputShortDescription" id="inputShortDescription" placeholder="Short description"></textarea>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label" for="inputPrice">Price <span class="text-error">(*)</span></label>
+          <div class="controls">
+            <input class="span5" type="number" name="inputPrice" id="inputPrice" placeholder="Price">
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="inputInformationDetail">Information Detail <span class="text-error">(*)</span></label>
+          <div class="controls">
+            <textarea class="span5" style="height: 100px" name="inputInformationDetail" id="inputInformationDetail" placeholder="Information Detail"></textarea>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label" for="description">Description <span class="text-error">(*)</span></label>
+          <div class="controls">
+            <textarea class="span5" style="height: 100px" name="inputDescription" id="inputDescription" placeholder="Description"></textarea>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label">Category <span class="text-error">(*)</span></label>
+          <div class="controls">
+            <select class="span1" name="inputCategory" id="inputCategory">
+              <option value="">-</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label" for="warranty">Warranty</label>
+          <div class="controls">
+            <input class="span1" type="number" name="inputWarranty" id="inputWarranty" placeholder="Warranty"/>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label" for="picture1">Picture 1 <span class="text-error">(*)</span></label>
+          <div class="controls">
+            <input class="span5" type="file" name="inputPicture1" id="inputPicture1" placeholder="picture1"/>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label" for="picture2">Picture 2</label>
+          <div class="controls">
+            <input class="span5" type="file" name="inputPicture2" id="inputPicture2" placeholder="picture2"/>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label" for="picture3">Picture 3</label>
+          <div class="controls">
+            <input class="span5" type="file" name="inputPicture3" id="inputPicture3" placeholder="picture3"/>
+          </div>
+        </div>
+
+        <p><sup>*</sup>@result </p>
+
+        <div class="control-group">
+          <div class="controls">
+            <input type="hidden" name="email_create" value="1">
+            <input type="hidden" name="is_new_customer" value="1">
+            <input class="btn btn-large btn-success" type="submit" value="Add Product" />
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+}

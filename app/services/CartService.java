@@ -22,23 +22,39 @@ public class CartService {
         this.shoppingCartDao = shoppingCartDao;
     }
 
-    public ShoppingCart getShoppingCart(String id) {
+    public void saveShoppingCart(ShoppingCart cart) {
+        shoppingCartDao.saveShoppingCart(cart);
+    }
+
+    public List<ShoppingCart> getAllShoppingCart() {
+        return shoppingCartDao.getAllShoppingCart();
+    }
+
+    public ShoppingCart getShoppingCart(int id) {
         return shoppingCartDao.getShoppingCart(id);
     }
 
-    public List<ShoppingCartDetail> getShoppingCartDetail(String id) {
+    public List<ShoppingCartDetail> getShoppingCartDetail(int id) {
         return shoppingCartDao.getShoppingCartDetail(id);
     }
 
-    public void addItemToCart(String cartID, Product product) {
+    public void addItemToCart(int cartID, Product product) {
         shoppingCartDao.addItemToCart(cartID, product);
     }
 
-    public ShoppingCartDetail getShoppingCartDetail(String cart_id, String item_id) {
+    public ShoppingCartDetail getShoppingCartDetail(int cart_id, String item_id) {
         return shoppingCartDao.getShoppingCartDetail(cart_id, item_id);
     }
 
-    public void removeItemFromCart(String cartID, ShoppingCartDetail shoppingCartDetail) {
-        shoppingCartDao.removeFromCart(cartID, shoppingCartDetail);
+    public void removeItemFromCart(int cart_id, String item_id) {
+        shoppingCartDao.removeFromCart(cart_id, item_id);
+    }
+
+    public List<ShoppingCartDetail> getShoppingCartDetailByProductId(int product_id) {
+        return shoppingCartDao.getShoppingCartDetailByProductId(product_id);
+    }
+
+    public void updateShoppingCart(ShoppingCart cart) {
+        shoppingCartDao.updateShoppingCart(cart);
     }
 }

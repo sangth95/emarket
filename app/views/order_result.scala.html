@@ -1,0 +1,77 @@
+@(title:String, name:String, address:String, phone:String, cart:ShoppingCart)
+
+@main(title){
+    <div class="span9">
+        <ul class="breadcrumb">
+            <li><a href="index.html">Home</a> <span class="divider">/</span></li>
+            <li class="active"> Order</li>
+        </ul>
+        <h3>  SHOPPING CART [ <small>3 Item(s) </small>]</h3>
+        <hr class="soft"/>
+        <table class="table table-bordered">
+            <tr><th> ORDER SUCCESSFULLY  </th></tr>
+            <tr>
+                <td>
+                    <div class="control-group">
+                        <label class="control-label" for="inputUsername">Name</label>
+                    </div>
+                </td>
+                <td>
+                    <div class="control-group">
+                        <label class="control-label" for="inputPassword1">@name</label>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="control-group">
+                        <label class="control-label" for="inputUsername">Email</label>
+                    </div>
+                </td>
+                <td>
+                    <div class="control-group">
+                        <label class="control-label" for="inputPassword1">@cart.getUserId</label>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="control-group">
+                        <label class="control-label" for="inputUsername">Address</label>
+                    </div>
+                </td>
+                <td>
+                    <div class="control-group">
+                        <label class="control-label" for="inputPassword1">@address</label>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="control-group">
+                        <label class="control-label" for="inputUsername">Phone number</label>
+                    </div>
+                </td>
+                <td>
+                    <div class="control-group">
+                        <label class="control-label" for="inputPassword1">@phone</label>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="control-group">
+                        <label class="control-label" for="inputUsername">Total price</label>
+                    </div>
+                </td>
+                <td>
+                    <div class="control-group">
+                        <label class="control-label" for="inputPassword1">@cart.getTotalPrice</label>
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+        <a class="btn btn-large pull-right" onclick="window.history.back();"><i class="icon-arrow-left"></i> Back to home </a>
+    </div>
+}

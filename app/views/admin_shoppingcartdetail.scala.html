@@ -1,0 +1,77 @@
+@(title: String, cart: models.ShoppingCart, cart_details: Array[ShoppingCartDetail])
+
+
+@main(title) {
+
+  <div class="span9">
+    <ul class="breadcrumb">
+      <li><a href="index.html">Home</a> <span class="divider">/</span></li>
+      <li class="active"> SHOPPING CART</li>
+    </ul>
+    <h3>  SHOPPING CART [ <small>@cart_details.size Item(s) </small>]<a href="@routes.AdminCartController.admin_ViewShoppingCartDetailOfCart(cart.getId)" class="btn btn-large pull-right"><i class="icon-arrow-left"></i> Back </a></h3>
+    <hr class="soft"/>
+
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Description</th>
+          <th>Quantity/Update</th>
+          <th>Price</th>
+          <th>Discount</th>
+          <th>Tax</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        @for(cartDetail <- cart_details) {
+          <tr>
+            <td> <img width="60" src="@routes.Assets.versioned("images/products/")@cartDetail.getItem().getAvatar()" alt=""/></td>
+            <td>@cartDetail.getItem().getName()<br/>@cartDetail.getItem().get50CharsOfDescription()</td>
+            <td>
+              <div class="input-append">
+                <input class="span1" style="max-width:34px" placeholder="1" id="appendedInputButtons" size="16" type="text">
+                <button class="btn" type="button"><i class="icon-minus"></i></button>
+                <button class="btn" type="button"><i class="icon-plus"></i></button>
+                <button class="btn btn-danger" type="button">
+                  <a href="@routes.CartController.guest_RemoveFromCart(cartDetail.getCart_id, cartDetail.getItem.getId.toString)"><i class="icon-remove icon-white"></i></a>
+                </button>
+              </div>
+            </td>
+            <td>@cartDetail.getPrice()</td> <!-- price -->
+            <td>$0.00</td> <!-- discount -->
+            <td>$0.00</td> <!-- tax -->
+            <td>@(cartDetail.getPrice())</td> <!-- total -->
+          </tr>
+        }
+
+        <tr>
+          <td colspan="6" style="text-align:right">Total Price:	</td>
+          <td> @cart.getTotalPrice</td>
+        </tr>
+        <tr>
+          <td colspan="6" style="text-align:right">Total Discount:	</td>
+          <td> $0.00</td>
+        </tr>
+        <tr>
+          <td colspan="6" style="text-align:right">Total Tax:	</td>
+          <td> $0.00</td>
+        </tr>
+        <tr>
+          <td colspan="6" style="text-align:right"><strong>TOTAL =</strong></td>
+          <td class="label label-important" style="display:block">
+            <strong>
+              @cart.getTotalPrice
+            </strong>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+
+    <a href="#" class="btn btn-large pull-right">Process</a>
+
+  </div>
+
+}

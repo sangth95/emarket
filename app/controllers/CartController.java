@@ -4,9 +4,11 @@ import models.Product;
 import models.ShoppingCart;
 import models.ShoppingCartDetail;
 import play.Routes;
+import play.data.DynamicForm;
 import play.data.FormFactory;
 import play.db.jpa.Transactional;
 import play.mvc.Controller;
+import play.mvc.Http;
 import play.mvc.Result;
 import services.CartService;
 import services.ProductService;
@@ -14,6 +16,9 @@ import views.html.*;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 
@@ -49,8 +54,9 @@ public class CartController extends Controller{
      */
     @Transactional
     public Result guest_ViewCart() {
-        ShoppingCart currentShoppingCart = cartService.getShoppingCart("001");
-        List<ShoppingCartDetail> shoppingCartDetailList = cartService.getShoppingCartDetail("001");
+        int currentCartIdStr = Integer.parseInt(session("currentCartId"));
+        ShoppingCart currentShoppingCart = cartService.getShoppingCart(currentCartIdStr);
+        List<ShoppingCartDetail> shoppingCartDetailList = cartService.getShoppingCartDetail(currentCartIdStr);
         return ok(shopping_cart.render("cart", currentShoppingCart, shoppingCartDetailList.toArray(new ShoppingCartDetail[shoppingCartDetailList.size()])));
     }
 
@@ -63,9 +69,8 @@ public class CartController extends Controller{
 
 
     @Transactional
-    public Result guest_RemoveFromCart(String cart_id, String item_id) {
-        ShoppingCartDetail shoppingCartDetail = cartService.getShoppingCartDetail(cart_id, item_id);
-        removeFromCart(shoppingCartDetail);
+    public Result guest_RemoveFromCart(int cart_id, String item_id) {
+        removeFromCart(cart_id, item_id);
         return guest_ViewCart();
     }
 
@@ -73,13 +78,36 @@ public class CartController extends Controller{
 
     @Transactional
     public ShoppingCart addToCart(int product_id) {
+        int currentCartIdStr = Integer.parseInt(session("currentCartId"));
         Product product = productService.getProduct(product_id);
-        cartService.addItemToCart("001", product);
-        return cartService.getShoppingCart("001");
+        cartService.addItemToCart(currentCartIdStr, product);
+        return cartService.getShoppingCart(currentCartIdStr);
     }
 
     @Transactional
-    public void removeFromCart(ShoppingCartDetail shoppingCartDetail) {
-        cartService.removeItemFromCart("001", shoppingCartDetail);
+    public Result completeOder() {
+        int currentCartIdStr = Integer.parseInt(session("currentCartId"));
+        ShoppingCart currentCart = cartService.getShoppingCart(currentCartIdStr);
+
+        DynamicForm form = formFactory.form().bindFromRequest();
+        Http.MultipartFormData formData = request().body().asMultipartFormData();
+
+        String inputName = form.get("inputName");
+        String inputEmail = form.get("inputEmail");
+        String inputAddress = form.get("inputAddress");
+        String inputPhoneNumber = form.get("inputPhoneNumber");
+
+        currentCart.setUserId(inputEmail);
+        String timeStamp = new SimpleDateFormat("yyyy/MM/dd").format(new Date());
+        currentCart.setDate(timeStamp);
+
+        cartService.updateShoppingCart(currentCart);
+
+        return ok(order_result.render("order result", inputName, inputAddress, inputPhoneNumber, currentCart));
+    }
+
+    @Transactional
+    public void removeFromCart(int cart_id, String item_id) {
+        cartService.removeItemFromCart(cart_id, item_id);
     }
 }
