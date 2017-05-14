@@ -23,6 +23,10 @@ public class UserService {
         return userDao.getUser(username, getHashPassword(username, password));
     }
 
+    public User getUser(String username) {
+        return userDao.getUser(username);
+    }
+
     private String getHashPassword(String username, String password)  {
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-256");

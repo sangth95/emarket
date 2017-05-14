@@ -1,6 +1,7 @@
 package security;
 
 import models.Role;
+import play.api.mvc.Session;
 import play.mvc.Action;
 import play.mvc.Http;
 import play.mvc.Result;
@@ -23,7 +24,7 @@ public class SecuredAction extends Action<RestrictByRole> {
 
     public CompletionStage<Result> call(Http.Context ctx)  {
         List<String> roles = Arrays.asList(configuration.value());
-        User user = userService.getUser(getUsername(), getPassword());
+        User user = userService.getUser(getUsername(ctx));
         String userRole = Optional.ofNullable(user)
                                 .map(User::getRole)
                                 .map(Role::getRoleName)
@@ -34,22 +35,10 @@ public class SecuredAction extends Action<RestrictByRole> {
             return delegate.call(ctx);
         }
 
-        return CompletableFuture.completedFuture(unauthorized());
+        return CompletableFuture.completedFuture(unauthorized("unauthorized"));
     }
 
-    private String getUsername() {
-        return "admin";
-    }
-
-    private String getPassword() {
-        return "admin";
-    }
-
-    private String getTokenFromHeader(Http.Context ctx) {
-        String[] authTokenHeaderValues = ctx.request().headers().get("X-AUTH-TOKEN");
-        if ((authTokenHeaderValues != null) && (authTokenHeaderValues.length == 1) && (authTokenHeaderValues[0] != null)) {
-            return authTokenHeaderValues[0];
-        }
-        return null;
+    private String getUsername(Http.Context ctx) {
+        return ctx.session().get("username");
     }
 }

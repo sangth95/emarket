@@ -1,0 +1,17 @@
+@(title: String, loginInformationForm: Form[LoginInformation])
+@import helper._
+
+
+@main(title) {
+
+    @helper.form(routes.LoginController.login()) {
+        Username:<br>
+        <input type="text" name="@{loginInformationForm("username").label}" value="@{loginInformationForm("username").value}">
+        <br>
+        Password:<br>
+        <input type="password" name="@{loginInformationForm("password").label}" value="@{loginInformationForm("password").value}">
+        <br><br>
+        <input type="submit" value="Login">
+    }
+
+}
