@@ -67,5 +67,6 @@ public class HomeController extends Controller {
             cartService.saveShoppingCart(shoppingCart);
             session("currentCartId", String.valueOf(shoppingCart.getId()));
         }
+
     }
 }

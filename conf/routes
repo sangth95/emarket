@@ -56,6 +56,8 @@ GET     /admin/update_product/:id   controllers.AdminProductController.admin_Upd
 GET     /admin/view_all_cart        controllers.AdminCartController.admin_getAllShoppingCart()
 GET     /admin/cart/:id             controllers.AdminCartController.admin_ViewShoppingCartDetailOfCart(id :  Integer)
 
+GET     /admin/sendmail             controllers.AdminCartController.admin_ProcessOrder(id : Integer)
+
 #---
 POST    /admin/add_new_product      controllers.AdminProductController.admin_AddNewProduct()
 POST    /admin/update_product       controllers.AdminProductController.admin_UpdateProduct(product_id: Integer)
