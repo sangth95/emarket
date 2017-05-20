@@ -31,6 +31,7 @@ public class LoginController extends Controller{
 
     @Transactional
     public Result login() {
+        session().remove("username");
         Form<LoginInformation> loginInformationForm = formFactory.form(LoginInformation.class).bindFromRequest();
         if (loginInformationForm.hasErrors()) {
             return badRequest("bad request");

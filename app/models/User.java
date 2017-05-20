@@ -3,6 +3,7 @@ package models;
 import play.data.validation.Constraints;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by An on 5/14/2017.
@@ -23,9 +24,23 @@ public class User {
     private String username;
     @Column(name = "hash_password")
     private String hashPassword;
-    @ManyToOne
-    @JoinColumn(name = "role")
-    private Role role;
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
+
+    @ManyToMany
+    @JoinTable(name="user_role",
+            joinColumns=
+            @JoinColumn(name="e_user", referencedColumnName="id"),
+            inverseJoinColumns=
+            @JoinColumn(name="role", referencedColumnName="id")
+    )
+    private List<Role> roles;
 
     public Integer getId() {
         return id;
@@ -51,11 +66,5 @@ public class User {
         this.hashPassword = hashPassword;
     }
 
-    public Role getRole() {
-        return role;
-    }
 
-    public void setRole(Role role) {
-        this.role = role;
-    }
 }
