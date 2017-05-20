@@ -28,9 +28,6 @@ GET     /cart/add/:item_id          controllers.CartController.guest_addToCart(i
 #------
 POST    /cart/oder                  controllers.CartController.completeOder()
 
-#Admin
-GET     /admin                      controllers.AdminController.adminPage()
-
 #Login
 GET     /login                      controllers.LoginController.loginPage()
 POST    /login                      controllers.LoginController.login()

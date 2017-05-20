@@ -15,6 +15,7 @@ import play.mvc.Controller;
 
 import play.mvc.Http;
 import play.mvc.Result;
+import security.RestrictByRole;
 import services.CartService;
 import services.ProductService;
 import views.html.*;
@@ -50,6 +51,7 @@ public class AdminProductController extends Controller {
      * @return
      */
     @Transactional
+    @RestrictByRole({"admin"})
     public Result admin_ViewAllProduct() {
         return ok(admin_product.render(
                 "admin_viewallproduct",

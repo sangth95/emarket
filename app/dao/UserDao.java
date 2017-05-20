@@ -2,7 +2,6 @@ package dao;
 
 import models.User;
 import org.springframework.util.CollectionUtils;
-
 import javax.inject.Singleton;
 
 import java.util.List;

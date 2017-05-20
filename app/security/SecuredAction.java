@@ -2,6 +2,7 @@ package security;
 
 import models.Role;
 import org.springframework.util.CollectionUtils;
+import play.db.jpa.Transactional;
 import play.mvc.Action;
 import play.mvc.Http;
 import play.mvc.Result;

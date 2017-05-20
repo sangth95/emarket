@@ -18,6 +18,7 @@ import javax.inject.Inject;
 public class LoginController extends Controller{
     private UserService userService;
     private FormFactory formFactory;
+
     @Inject
     public LoginController(UserService userService, FormFactory formFactory) {
         this.userService = userService;
@@ -25,25 +26,34 @@ public class LoginController extends Controller{
     }
 
     public Result loginPage() {
+        removeUserFromSession();
         Form<LoginInformation> loginInformationForm = formFactory.form(LoginInformation.class);
         return ok(login.render("Login", loginInformationForm));
     }
 
     @Transactional
     public Result login() {
-        session().remove("username");
+        removeUserFromSession();
         Form<LoginInformation> loginInformationForm = formFactory.form(LoginInformation.class).bindFromRequest();
         if (loginInformationForm.hasErrors()) {
-            return badRequest("bad request");
+            return badRequest("Bad request");
         }
         LoginInformation loginInformation = loginInformationForm.get();
         if (null != userService.getUser(loginInformation.username, loginInformation.password)) {
             session().put("username", loginInformation.username);
-            return Results.redirect(routes.HomeController.index());
+            return Results.redirect(routes.AdminProductController.admin_ViewAllProduct());
         } else {
-            return unauthorized("unauthorized");
+            flash("loginFail", "Username or password is incorrect!");
+            return loginPage();
         }
     }
 
+    public Result logout() {
+        removeUserFromSession();
+        return Results.redirect(routes.HomeController.index());
+    }
 
+    private void removeUserFromSession() {
+        session().remove("username");
+    }
 }
