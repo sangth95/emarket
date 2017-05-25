@@ -46,6 +46,8 @@ public class AdminCartController extends Controller {
 
     @Inject
     MailerClient mailerClient;
+
+    @Transactional
     public Result admin_ProcessOrder(int id) {
         ArrayList<ShoppingCartDetail> shoppingCartDetailArrayList = (ArrayList<ShoppingCartDetail>) cartService.getShoppingCartDetail(id);
         ShoppingCart cart = cartService.getShoppingCart(id);
@@ -103,7 +105,10 @@ public class AdminCartController extends Controller {
                 .addTo("adamtruonglk@gmail.com")
                 .setBodyHtml(htmlBody);
         mailerClient.send(email);
-        return ok("ok");
+        //mark done
+        cart.setComplete(2);
+        cartService.updateShoppingCart(cart);
+        return admin_getAllShoppingCart();
     }
 
 }

@@ -45,7 +45,7 @@ public class ShoppingCartDao {
     }
 
     public List<ShoppingCart> getAllShoppingCart() {
-        return jpaApi.em().createNamedQuery("shoppingCart.getAll", ShoppingCart.class).getResultList();
+        return jpaApi.em().createNamedQuery("shoppingCart.getAllComplete", ShoppingCart.class).setParameter("complete", 1).getResultList();
     }
 
     public List<ShoppingCartDetail> getShoppingCartDetail(int cart_id) {
@@ -98,6 +98,7 @@ public class ShoppingCartDao {
         ShoppingCart shoppingCart = jpaApi.em().find(ShoppingCart.class, cart.getId());
         shoppingCart.setUserId(cart.getUserId());
         shoppingCart.setDate(cart.getDate());
+        shoppingCart.setComplete(cart.getComplete());
     }
 
     public void removeFromCart(int cart_id, String item_id) {

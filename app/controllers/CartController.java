@@ -16,6 +16,7 @@ import views.html.*;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import java.net.SocketPermission;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -97,13 +98,25 @@ public class CartController extends Controller{
         String inputAddress = form.get("inputAddress");
         String inputPhoneNumber = form.get("inputPhoneNumber");
 
-        currentCart.setUserId(inputEmail);
-        String timeStamp = new SimpleDateFormat("yyyy/MM/dd").format(new Date());
-        currentCart.setDate(timeStamp);
+        if (   inputName.isEmpty()
+                || inputEmail.isEmpty()
+                || inputAddress.isEmpty()
+                || inputPhoneNumber.isEmpty()) {
+            flash("info_err", "You need to fill in all infomation!");
+            return guest_ViewCart();
+        }
+        else {
+            currentCart.setUserId(inputEmail);
+            String timeStamp = new SimpleDateFormat("yyyy/MM/dd").format(new Date());
+            currentCart.setDate(timeStamp);
 
-        cartService.updateShoppingCart(currentCart);
+            //complete
+            currentCart.setComplete(1);
 
-        return ok(order_result.render("order result", inputName, inputAddress, inputPhoneNumber, currentCart));
+            cartService.updateShoppingCart(currentCart);
+
+            return ok(order_result.render("order result", inputName, inputAddress, inputPhoneNumber, currentCart));
+        }
     }
 
     @Transactional

@@ -24,6 +24,11 @@
       <div class="tab-pane" id="listView">
       @for(shoppingCart <- shoppingCartList) {
         <div class="row">
+          @if(shoppingCart.getComplete == 2){
+            <div class="span1"><br><i class="icon icon-ok-sign icon-large"></i></div>
+          }else{
+            <div class="span1"><br><i></i></div>
+          }
           <div class="span5">
             <h5>@shoppingCart.getDate</h5>
             <h4 class="pull-left" style="color: #0e90d2">User Id: @shoppingCart.getUserId</h4>

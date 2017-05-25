@@ -20,7 +20,8 @@ import java.util.List;
 @Entity
 @Table(name = "shopping_cart")
 @NamedQueries({
-        @NamedQuery(name = "shoppingCart.getAll", query = "SELECT sc FROM ShoppingCart sc")
+        @NamedQuery(name = "shoppingCart.getAll", query = "SELECT sc FROM ShoppingCart sc"),
+        @NamedQuery(name = "shoppingCart.getAllComplete", query = "SELECT sc FROM ShoppingCart sc WHERE sc.complete >= :complete")
 })
 public class ShoppingCart {
     @TableGenerator(name = "shoppingcart_gen", table = "id_gen", pkColumnName = "gen_name", valueColumnName = "gen_val", allocationSize = 100)
@@ -34,6 +35,8 @@ public class ShoppingCart {
     private String userId;
 
     private String date;
+
+    private int complete;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "cart_id")
     private List<ShoppingCartDetail> shoppingCartDetailList;
@@ -79,4 +82,11 @@ public class ShoppingCart {
         return totalPrice;
     }
 
+    public int getComplete() {
+        return complete;
+    }
+
+    public void setComplete(int complete) {
+        this.complete = complete;
+    }
 }

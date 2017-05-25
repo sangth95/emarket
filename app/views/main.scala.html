@@ -44,7 +44,7 @@
                     },
                     dataType: "text",
                     success : function(data) {
-                        alert("Cool!!!");
+                        alert("Add product successfully!!!");
                     },
                     error : function(data) {
                         alert("Error!!!");
@@ -61,14 +61,8 @@
                     <div class="span6">Welcome!<strong> User</strong></div>
                     <div class="span6">
                         <div class="pull-right">
-                            <a href="@routes.Assets.versioned("shopping_cart.html")"><span class="">Fr</span></a>
-                            <a href="@routes.Assets.versioned("shopping_cart.html")"><span class="">Es</span></a>
-                            <span class="btn btn-mini">En</span>
-                            <a href="@routes.Assets.versioned("shopping_cart.html")"><span>&pound;</span></a>
-                            <span class="btn btn-mini">$155.00</span>
-                            <a href="@routes.Assets.versioned("shopping_cart.html")"><span class="">$</span></a>
                             <a href="@routes.CartController.guest_ViewCart()"><span class="btn btn-mini btn-primary"><i class="icon-shopping-cart icon-white"></i>
-                                [ 3 ] Itemes in your cart </span>
+                                View your cart </span>
                             </a>
                         </div>
                     </div>
@@ -203,7 +197,7 @@
                         <!-- Sidebar ================================================== -->
                     <div id="sidebar" class="span3">
                         <div class="well well-small"><a id="myCart" href="@routes.CartController.guest_ViewCart()"><img src="@routes.Assets.versioned("themes/images/ico-cart.png")" alt="cart">
-                            3 Items in your cart <span class="badge badge-warning pull-right">$155.00</span></a>
+                            <span class="badge badge-warning">View your cart </span></a>
                         </div>
                         <ul id="sideManu" class="nav nav-tabs nav-stacked">
                             <li class="subMenu open"><a> ELECTRONICS </a>
@@ -222,25 +216,25 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li class="subMenu"><a> CLOTHES [840] </a>
+                            <li class="subMenu"><a> CLOTHES  </a>
                                 <ul style="display: none">
                                     <li><a href="products.html"><i class="icon-chevron-right"></i>
-                                        Women's Clothing (45)</a>
+                                        Women's Clothing </a>
                                     </li>
                                     <li><a href="products.html"><i class="icon-chevron-right"></i>
-                                        Women's Shoes (8)</a>
+                                        Women's Shoes </a>
                                     </li>
                                     <li><a href="products.html"><i class="icon-chevron-right"></i>
-                                        Women's Hand Bags (5)</a>
+                                        Women's Hand Bags </a>
                                     </li>
                                     <li><a href="products.html"><i class="icon-chevron-right"></i>
-                                        Men's Clothings  (45)</a>
+                                        Men's Clothings  </a>
                                     </li>
-                                    <li><a href="products.html"><i class="icon-chevron-right"></i>Men's Shoes (6)</a></li>
+                                    <li><a href="products.html"><i class="icon-chevron-right"></i>Men's Shoes </a></li>
                                     <li><a href="products.html"><i class="icon-chevron-right"></i>
-                                        Kids Clothing (5)</a>
+                                        Kids Clothing </a>
                                     </li>
-                                    <li><a href="products.html"><i class="icon-chevron-right"></i>Kids Shoes (3)</a></li>
+                                    <li><a href="products.html"><i class="icon-chevron-right"></i>Kids Shoes </a></li>
                                 </ul>
                             </li>
                             <li class="subMenu"><a>FOOD AND BEVERAGES [1000]</a>
