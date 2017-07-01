@@ -15,6 +15,7 @@ libraryDependencies ++= Seq(
   javaJpa,
   "dom4j" % "dom4j" % "1.6.1" intransitive(),
   "org.postgresql" % "postgresql" % "9.4-1206-jdbc42",
-  "com.typesafe.play" %% "play-mailer" % "5.0.0"
+  "com.typesafe.play" %% "play-mailer" % "5.0.0",
+  "org.apache.poi" % "poi-ooxml" % "3.16"
 )
 

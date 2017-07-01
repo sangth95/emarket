@@ -10,7 +10,7 @@
 
   <div class="span9">
     <ul class="breadcrumb">
-      <li><a href="index.html">Home</a> <span class="divider">/</span></li>
+      <li><a href="index">Home</a> <span class="divider">/</span></li>
       <li class="active">@keyword</li>
     </ul>
     <h3> @keyword <small class="pull-right"> @products.size products are available </small></h3>
@@ -19,6 +19,10 @@
       Nowadays the lingerie industry is one of the most successful business spheres.We always stay in touch with the latest fashion tendencies - that is why our goods are so popular and we have a great number of faithful customers all over the country.
     </p>
 
+    <a class="btn btn-info pull-right" href="@routes.AdminProductController.admin_AddNewProductPage()">Import <i class="glyphicon glyphicon-import"></i></a><br/>
+    <br>
+    <a class="btn btn-primary pull-right" href="@routes.AdminProductController.exportProducts()">Export <i class="glyphicon glyphicon-export"></i></a><br/>
+    <br>
     <a class="btn btn-success pull-right" href="@routes.AdminProductController.admin_AddNewProductPage()">Add new <i class="icon-plus"></i></a><br/>
 
     <hr class="soft"/>

@@ -44,6 +44,7 @@ GET     /javascriptRoutes           controllers.CartController.javascriptRoutes
 
 
 #ADMIN
+GET     /admin/index                controllers.AdminProductController.admin_ViewAllProduct()
 GET     /admin/view_all_product     controllers.AdminProductController.admin_ViewAllProduct()
 POST    /admin/product/sort         controllers.AdminProductController.sortProduct(title: String, categoryName: String)
 GET     /admin/remove/:id           controllers.AdminProductController.admin_DeleteProduct(id : Integer)
@@ -58,3 +59,12 @@ GET     /admin/sendmail             controllers.AdminCartController.admin_Proces
 #---
 POST    /admin/add_new_product      controllers.AdminProductController.admin_AddNewProduct()
 POST    /admin/update_product       controllers.AdminProductController.admin_UpdateProduct(product_id: Integer)
+
+
+#Product service
+GET     /api/products/:id           controllers.ProductServiceController.getProduct(id: Integer)
+GET     /api/products               controllers.ProductServiceController.getProducts()
+GET     /api/products/byCategory    controllers.ProductServiceController.getProductByCategory(categoryName: String, sortType: String)
+
+#Export
+GET     /admin/export/products      controllers.AdminProductController.exportProducts()

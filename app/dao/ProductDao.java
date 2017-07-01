@@ -82,8 +82,7 @@ public class ProductDao {
 
 
     public List<Product> getProductList() {
-        List<Product> products = jpaApi.em().createNamedQuery("Product.getAll", Product.class).getResultList();
-        return products;
+        return jpaApi.withTransaction(() -> jpaApi.em().createNamedQuery("Product.getAll", Product.class).getResultList());
     }
 
     public  List<Product> getProductList(String behavior, String keyword) {

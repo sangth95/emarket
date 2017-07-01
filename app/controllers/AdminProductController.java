@@ -2,10 +2,11 @@ package controllers;
 
 import Helper.Sort;
 import dao.ShoppingCartDao;
-import models.Category;
-import models.Manufacturer;
-import models.Product;
-import models.ShoppingCartDetail;
+import models.*;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import play.api.Play;
 import play.data.DynamicForm;
 import play.data.Form;
@@ -25,10 +26,13 @@ import javax.inject.Inject;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 /**
  * Created by HongSang on 5/10/2017.
@@ -262,4 +266,59 @@ public class AdminProductController extends Controller {
         productService.removeProduct(id);
         return admin_ViewAllProduct();
     }
+
+    @Transactional
+    public Result exportProducts() throws IOException {
+        XSSFWorkbook workbook = new XSSFWorkbook();
+        XSSFSheet sheet = workbook.createSheet("Products");
+        List<Product> products = productService.getProducts();
+
+        int rowCount = 0;
+        Row firstRow = sheet.createRow(rowCount++);
+        int col = 0;
+        Cell cell = firstRow.createCell(col++);
+        cell.setCellValue("Mã");
+        cell = firstRow.createCell(col++);
+        cell.setCellValue("Tên");
+        cell = firstRow.createCell(col++);
+        cell.setCellValue("Nhà sản xuất");
+        cell = firstRow.createCell(col++);
+        cell.setCellValue("Loại");
+        cell = firstRow.createCell(col++);
+        cell.setCellValue("Ngành hàng");
+        cell = firstRow.createCell(col++);
+        cell.setCellValue("Mô tả");
+        cell = firstRow.createCell(col++);
+        cell.setCellValue("Giá");
+
+        for(Product product: products) {
+            Optional<Product> po = Optional.ofNullable(product);
+            Row row = sheet.createRow(rowCount++);
+            col = 0;
+            cell = row.createCell(col++);
+            cell.setCellValue(product.getId());
+            cell = row.createCell(col++);
+            cell.setCellValue(product.getName());
+            cell = row.createCell(col++);
+            cell.setCellValue(product.getManufacturer().getName());
+            cell = row.createCell(col++);
+            cell.setCellValue(product.getCategory().getName());
+            cell = row.createCell(col++);
+            cell.setCellValue(po.map(Product::getCategory).map(Category::getBranch).map(Branch::getName).orElse(""));
+            cell = row.createCell(col++);
+            cell.setCellValue(product.getShortDescription());
+            cell = row.createCell(col++);
+            cell.setCellValue(product.getStringPrice());
+        }
+
+
+        String fileName = "public/file/Products-" + UUID.randomUUID().toString() + ".xlsx";
+
+        FileOutputStream outputStream = new FileOutputStream(fileName);
+        workbook.write(outputStream);
+        workbook.close();
+
+        return ok(new File(fileName));
+    }
+
 }

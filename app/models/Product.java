@@ -1,5 +1,6 @@
 package models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import play.data.validation.Constraints;
 
 import javax.persistence.*;
@@ -38,7 +39,7 @@ public class Product {
     @Column(name = "information_detail")
     private String informationDetail;
     private String description;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "category", referencedColumnName = "id")
     private Category category;
     private String warranty;
@@ -69,6 +70,7 @@ public class Product {
         this.manufacturer = manufacturer;
     }
 
+    @JsonIgnore
     public String[] getNormalizedShortDescription() {
         if (null == shortDescription || shortDescription.isEmpty())
             return null;
@@ -91,6 +93,7 @@ public class Product {
         this.price = price;
     }
 
+    @JsonIgnore
     public Entry[] getNormalizedInformationDetail() {
         if (null == informationDetail || informationDetail.isEmpty())
             return null;

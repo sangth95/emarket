@@ -14,7 +14,7 @@ public class Category {
     private Integer id;
     private String name;
     private String description;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "branch")
     private Branch branch;
 

@@ -49,8 +49,8 @@ button:hover {
 
     @helper.form(routes.LoginController.login()) {
         <div class="container">
-            <label><b>Username</b></label>
-            <input type="text" placeholder="Enter Username" name="@{loginInformationForm("username").label}" value="@{loginInformationForm("username").value}" required>
+            <label><b>Email</b></label>
+            <input type="text" placeholder="Enter Email" name="@{loginInformationForm("username").label}" value="@{loginInformationForm("username").value}" required>
 
             <label><b>Password</b></label>
             <input type="password" placeholder="Enter Password" name="@{loginInformationForm("password").label}" value="@{loginInformationForm("password").value}" required>

@@ -36,14 +36,14 @@ public class LoginController extends Controller{
         removeUserFromSession();
         Form<LoginInformation> loginInformationForm = formFactory.form(LoginInformation.class).bindFromRequest();
         if (loginInformationForm.hasErrors()) {
-            return badRequest("Bad request");
+            return loginPage();
         }
         LoginInformation loginInformation = loginInformationForm.get();
         if (null != userService.getUser(loginInformation.username, loginInformation.password)) {
             session().put("username", loginInformation.username);
             return Results.redirect(routes.AdminProductController.admin_ViewAllProduct());
         } else {
-            flash("loginFail", "Username or password is incorrect!");
+            flash("loginFail", "Email or password is incorrect!");
             return loginPage();
         }
     }
