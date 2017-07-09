@@ -14,8 +14,8 @@ GET     /special_offer              controllers.HomeController.getSpecialOffer()
 #PRODUCT CONTROLLER
 GET     /product/:id                controllers.ProductController.product(id: Integer)
 GET     /products                   controllers.ProductController.getProducts()
-GET     /products/:categoryName     controllers.ProductController.guest_ViewProductListByCategory(categoryName: String, sortType: String)
-GET     /products/search/:key       controllers.ProductController.guest_SearchProduct(key: String, sortType: String)
+GET     /products/:categoryName     controllers.ProductController.guest_ViewProductListByCategory(categoryName: String, sortType: String, price: String)
+GET     /products/search/:key       controllers.ProductController.guest_SearchProduct(key: String, sortType: String, price: String)
 #------
 POST    /products/search            controllers.ProductController.searchProductByForm()
 POST    /product/sort               controllers.ProductController.sortProduct(title: String, categoryName: String)

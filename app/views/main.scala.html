@@ -100,64 +100,6 @@
         @if(title == "Bootshop") {
             <div id="carouselBlk">
                 <div id="myCarousel" class="carousel slide">
-                    <div class="carousel-inner">
-                        <div class="item active">
-                            <div class="container">
-                                <a href="register.html"><img style="width: 100%" src="@routes.Assets.versioned("themes/images/carousel/1.png")" alt="special offers"/></a>
-                                <div class="carousel-caption">
-                                    <h4>Second Thumbnail label</h4>
-                                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="container">
-                                <a href="register.html"><img style="width: 100%" src="@routes.Assets.versioned("themes/images/carousel/2.png")" alt=""/></a>
-                                <div class="carousel-caption">
-                                    <h4>Second Thumbnail label</h4>
-                                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="container">
-                                <a href="register.html"><img src="@routes.Assets.versioned("themes/images/carousel/3.png")" alt=""/></a>
-                                <div class="carousel-caption">
-                                    <h4>Second Thumbnail label</h4>
-                                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="container">
-                                <a href="register.html"><img src="@routes.Assets.versioned("themes/images/carousel/4.png")" alt=""/></a>
-                                <div class="carousel-caption">
-                                    <h4>Second Thumbnail label</h4>
-                                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="container">
-                                <a href="register.html"><img src="@routes.Assets.versioned("themes/images/carousel/5.png")" alt=""/></a>
-                                <div class="carousel-caption">
-                                    <h4>Second Thumbnail label</h4>
-                                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="container">
-                                <a href="register.html"><img src="@routes.Assets.versioned("themes/images/carousel/6.png")" alt=""/></a>
-                                <div class="carousel-caption">
-                                    <h4>Second Thumbnail label</h4>
-                                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                         <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
                         <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
                 </div>
@@ -175,94 +117,35 @@
                         <ul id="sideManu" class="nav nav-tabs nav-stacked">
                             <li class="subMenu open"><a> ELECTRONICS </a>
                                 <ul>
-                                    <li><a class="active" href="@routes.ProductController.guest_ViewProductListByCategory("Cameras", "")"><i class="icon-chevron-right"></i>
+                                    <li><a class="active" href="@routes.ProductController.guest_ViewProductListByCategory("Cameras", "", "")"><i class="icon-chevron-right"></i>
                                         Cameras  </a>
                                     </li>
-                                    <li><a href="@routes.ProductController.guest_ViewProductListByCategory("Computers, Tablets & laptop", "")"><i class="icon-chevron-right"></i>
+                                    <li><a href="@routes.ProductController.guest_ViewProductListByCategory("Computers, Tablets & laptop", "","")"><i class="icon-chevron-right"></i>
                                         Computers, Tablets & laptop </a>
                                     </li>
-                                    <li><a href="@routes.ProductController.guest_ViewProductListByCategory("Mobile Phone", "")"><i class="icon-chevron-right"></i>
+                                    <li><a href="@routes.ProductController.guest_ViewProductListByCategory("Mobile Phone", "","")"><i class="icon-chevron-right"></i>
                                         Mobile Phone </a>
                                     </li>
-                                    <li><a href="@routes.ProductController.guest_ViewProductListByCategory("Sound & Vision", "")"><i class="icon-chevron-right"></i>
+                                    <li><a href="@routes.ProductController.guest_ViewProductListByCategory("Sound & Vision", "", "")"><i class="icon-chevron-right"></i>
                                         Sound & Vision </a>
                                     </li>
                                 </ul>
                             </li>
                             <li class="subMenu"><a> CLOTHES  </a>
                                 <ul style="display: none">
-                                    <li><a href="products.html"><i class="icon-chevron-right"></i>
+                                    <li><a href="@routes.ProductController.guest_ViewProductListByCategory("Women's Clothing", "", "")"><i class="icon-chevron-right"></i>
                                         Women's Clothing </a>
                                     </li>
-                                    <li><a href="products.html"><i class="icon-chevron-right"></i>
-                                        Women's Shoes </a>
-                                    </li>
-                                    <li><a href="products.html"><i class="icon-chevron-right"></i>
-                                        Women's Hand Bags </a>
-                                    </li>
-                                    <li><a href="products.html"><i class="icon-chevron-right"></i>
+                                    <li><a href="@routes.ProductController.guest_ViewProductListByCategory("Men's Clothings", "", "")"><i class="icon-chevron-right"></i>
                                         Men's Clothings  </a>
                                     </li>
-                                    <li><a href="products.html"><i class="icon-chevron-right"></i>Men's Shoes </a></li>
-                                    <li><a href="products.html"><i class="icon-chevron-right"></i>
-                                        Kids Clothing </a>
-                                    </li>
-                                    <li><a href="products.html"><i class="icon-chevron-right"></i>Kids Shoes </a></li>
                                 </ul>
                             </li>
-                            <li class="subMenu"><a>FOOD AND BEVERAGES [1000]</a>
-                                <ul style="display: none">
-                                    <li><a href="products.html"><i class="icon-chevron-right"></i>Angoves  (35)</a></li>
-                                    <li><a href="products.html"><i class="icon-chevron-right"></i>
-                                        Bouchard Aine & Fils (8)</a>
-                                    </li>
-                                    <li><a href="products.html"><i class="icon-chevron-right"></i>
-                                        French Rabbit (5)</a>
-                                    </li>
-                                    <li><a href="products.html"><i class="icon-chevron-right"></i>
-                                        Louis Bernard  (45)</a>
-                                    </li>
-                                    <li><a href="products.html"><i class="icon-chevron-right"></i>
-                                        BIB Wine (Bag in Box) (8)</a>
-                                    </li>
-                                    <li><a href="products.html"><i class="icon-chevron-right"></i>
-                                        Other Liquors & Wine (5)</a>
-                                    </li>
-                                    <li><a href="products.html"><i class="icon-chevron-right"></i>Garden (3)</a></li>
-                                    <li><a href="products.html"><i class="icon-chevron-right"></i>Khao Shong (11)</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="products.html">HEALTH & BEAUTY [18]</a></li>
-                            <li><a href="products.html">SPORTS & LEISURE [58]</a></li>
-                            <li><a href="products.html">BOOKS & ENTERTAINMENTS [14]</a></li>
+                            <li><a href="@routes.ProductController.guest_ViewProductListByCategory("HEALTH & BEAUTY",  "","")">HEALTH & BEAUTY</a></li>
+                            <li><a href="@routes.ProductController.guest_ViewProductListByCategory("SPORTS & LEISURE",  "","")">SPORTS & LEISURE</a></li>
+                            <li><a href="@routes.ProductController.guest_ViewProductListByCategory("BOOKS & ENTERTAINMENTS", "", "")">BOOKS & ENTERTAINMENTS</a></li>
                         </ul>
                         <br/>
-                        <div class="thumbnail">
-                            <img src="@routes.Assets.versioned("themes/images/products/panasonic.jpg")" alt="Bootshop panasonoc New camera"/>
-                            <div class="caption">
-                                <h5>Panasonic</h5>
-                                <h4 style="text-align: center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a>
-                                    <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a>
-                                    <a class="btn btn-primary" href="#">$222.00</a></h4>
-                            </div>
-                        </div>
-                        <br/>
-                        <div class="thumbnail">
-                            <img src="@routes.Assets.versioned("themes/images/products/kindle.png")" title="Bootshop New Kindel" alt="Bootshop Kindel">
-                            <div class="caption">
-                                <h5>Kindle</h5>
-                                <h4 style="text-align: center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a>
-                                    <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a>
-                                    <a class="btn btn-primary" href="#">$222.00</a></h4>
-                            </div>
-                        </div>
-                        <br/>
-                        <div class="thumbnail">
-                            <img src="@routes.Assets.versioned("themes/images/payment_methods.png")" title="Bootshop Payment Methods" alt="Payments Methods">
-                            <div class="caption">
-                                <h5>Payment Methods</h5>
-                            </div>
-                        </div>
                     </div>
 
                     @content
@@ -317,64 +200,5 @@
 
         <script src="@routes.Assets.versioned("themes/js/bootshop.js")"></script>
         <script src="@routes.Assets.versioned("themes/js/jquery.lightbox-0.5.js")"></script>
-
-            <!-- Themes switcher section ============================================================================================= -->
-        <div id="secectionBox">
-            <link rel="stylesheet" href="@routes.Assets.versioned("themes/switch/themeswitch.css")" type="text/css" media="screen" />
-            <script src="@routes.Assets.versioned("themes/switch/theamswitcher.js")" type="text/javascript" charset="utf-8"></script>
-            <div id="themeContainer">
-                <div id="hideme" class="themeTitle">Style Selector</div>
-                <div class="themeName">Oregional Skin</div>
-                <div class="images style">
-                    <a href="stylesheets/themes/css/#" name="bootshop"><img src="@routes.Assets.versioned("themes/switch/images/clr/bootshop.png")" alt="bootstrap business templates" class="active"></a>
-                    <a href="stylesheets/themes/css/#" name="businessltd"><img src="@routes.Assets.versioned("themes/switch/images/clr/businessltd.png")" alt="bootstrap business templates" class="active"></a>
-                </div>
-                <div class="themeName">Bootswatch Skins (11)</div>
-                <div class="images style">
-                    <a href="stylesheets/themes/css/#" name="amelia" title="Amelia"><img src="@routes.Assets.versioned("themes/switch/images/clr/amelia.png")" alt="bootstrap business templates"></a>
-                    <a href="stylesheets/themes/css/#" name="spruce" title="Spruce"><img src="@routes.Assets.versioned("themes/switch/images/clr/spruce.png")" alt="bootstrap business templates" ></a>
-                    <a href="stylesheets/themes/css/#" name="superhero" title="Superhero"><img src="@routes.Assets.versioned("themes/switch/images/clr/superhero.png")" alt="bootstrap business templates"></a>
-                    <a href="stylesheets/themes/css/#" name="cyborg"><img src="@routes.Assets.versioned("themes/switch/images/clr/cyborg.png")" alt="bootstrap business templates"></a>
-                    <a href="stylesheets/themes/css/#" name="cerulean"><img src="@routes.Assets.versioned("themes/switch/images/clr/cerulean.png")" alt="bootstrap business templates"></a>
-                    <a href="stylesheets/themes/css/#" name="journal"><img src="@routes.Assets.versioned("themes/switch/images/clr/journal.png")" alt="bootstrap business templates"></a>
-                    <a href="stylesheets/themes/css/#" name="readable"><img src="@routes.Assets.versioned("themes/switch/images/clr/readable.png")" alt="bootstrap business templates"></a>
-                    <a href="stylesheets/themes/css/#" name="simplex"><img src="@routes.Assets.versioned("themes/switch/images/clr/simplex.png")" alt="bootstrap business templates"></a>
-                    <a href="stylesheets/themes/css/#" name="slate"><img src="@routes.Assets.versioned("themes/switch/images/clr/slate.png")" alt="bootstrap business templates"></a>
-                    <a href="stylesheets/themes/css/#" name="spacelab"><img src="@routes.Assets.versioned("themes/switch/images/clr/spacelab.png")" alt="bootstrap business templates"></a>
-                    <a href="stylesheets/themes/css/#" name="united"><img src="@routes.Assets.versioned("themes/switch/images/clr/united.png")" alt="bootstrap business templates"></a>
-                    <p style="margin: 0;
-                        line-height: normal;
-                        margin-left: -10px;
-                        display: none;"><small>These are just examples and you can build your own color scheme in the backend.</small></p>
-                </div>
-                <div class="themeName">Background Patterns </div>
-                <div class="images patterns">
-                    <a href="stylesheets/themes/css/#" name="pattern1"><img src="@routes.Assets.versioned("themes/switch/images/pattern/pattern1.png")" alt="bootstrap business templates" class="active"></a>
-                    <a href="stylesheets/themes/css/#" name="pattern2"><img src="@routes.Assets.versioned("themes/switch/images/pattern/pattern2.png")" alt="bootstrap business templates"></a>
-                    <a href="stylesheets/themes/css/#" name="pattern3"><img src="@routes.Assets.versioned("themes/switch/images/pattern/pattern3.png")" alt="bootstrap business templates"></a>
-                    <a href="stylesheets/themes/css/#" name="pattern4"><img src="@routes.Assets.versioned("themes/switch/images/pattern/pattern4.png")" alt="bootstrap business templates"></a>
-                    <a href="stylesheets/themes/css/#" name="pattern5"><img src="@routes.Assets.versioned("themes/switch/images/pattern/pattern5.png")" alt="bootstrap business templates"></a>
-                    <a href="stylesheets/themes/css/#" name="pattern6"><img src="@routes.Assets.versioned("themes/switch/images/pattern/pattern6.png")" alt="bootstrap business templates"></a>
-                    <a href="stylesheets/themes/css/#" name="pattern7"><img src="@routes.Assets.versioned("themes/switch/images/pattern/pattern7.png")" alt="bootstrap business templates"></a>
-                    <a href="stylesheets/themes/css/#" name="pattern8"><img src="@routes.Assets.versioned("themes/switch/images/pattern/pattern8.png")" alt="bootstrap business templates"></a>
-                    <a href="stylesheets/themes/css/#" name="pattern9"><img src="@routes.Assets.versioned("themes/switch/images/pattern/pattern9.png")" alt="bootstrap business templates"></a>
-                    <a href="stylesheets/themes/css/#" name="pattern10"><img src="@routes.Assets.versioned("themes/switch/images/pattern/pattern10.png")" alt="bootstrap business templates"></a>
-
-                    <a href="stylesheets/themes/css/#" name="pattern11"><img src="@routes.Assets.versioned("themes/switch/images/pattern/pattern11.png")" alt="bootstrap business templates"></a>
-                    <a href="stylesheets/themes/css/#" name="pattern12"><img src="@routes.Assets.versioned("themes/switch/images/pattern/pattern12.png")" alt="bootstrap business templates"></a>
-                    <a href="stylesheets/themes/css/#" name="pattern13"><img src="@routes.Assets.versioned("themes/switch/images/pattern/pattern13.png")" alt="bootstrap business templates"></a>
-                    <a href="stylesheets/themes/css/#" name="pattern14"><img src="@routes.Assets.versioned("themes/switch/images/pattern/pattern14.png")" alt="bootstrap business templates"></a>
-                    <a href="stylesheets/themes/css/#" name="pattern15"><img src="@routes.Assets.versioned("themes/switch/images/pattern/pattern15.png")" alt="bootstrap business templates"></a>
-
-                    <a href="stylesheets/themes/css/#" name="pattern16"><img src="@routes.Assets.versioned("themes/switch/images/pattern/pattern16.png")" alt="bootstrap business templates"></a>
-                    <a href="stylesheets/themes/css/#" name="pattern17"><img src="@routes.Assets.versioned("themes/switch/images/pattern/pattern17.png")" alt="bootstrap business templates"></a>
-                    <a href="stylesheets/themes/css/#" name="pattern18"><img src="@routes.Assets.versioned("themes/switch/images/pattern/pattern18.png")" alt="bootstrap business templates"></a>
-                    <a href="stylesheets/themes/css/#" name="pattern19"><img src="@routes.Assets.versioned("themes/switch/images/pattern/pattern19.png")" alt="bootstrap business templates"></a>
-                    <a href="stylesheets/themes/css/#" name="pattern20"><img src="@routes.Assets.versioned("themes/switch/images/pattern/pattern20.png")" alt="bootstrap business templates"></a>
-
-                </div>
-            </div>
-        </div>
-        <span id="themesBtn"></span>
     </body>
 </html>

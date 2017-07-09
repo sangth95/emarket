@@ -14,6 +14,8 @@ import  models.Product;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -55,21 +57,48 @@ public class ProductController extends Controller {
      * @return
      */
     @Transactional
-    public Result guest_ViewProductListByCategory(String categoryName, String sortType) {
+    public Result guest_ViewProductListByCategory(String categoryName, String sortType, String price) {
         List<Product> productList = productService.getProducts("get by category", categoryName);
         Product[] products = productList.toArray(new Product[productList.size()]);
 
-        if (sortType.equals("Product name A - Z")) {
+        if (sortType != null && sortType.equals("Product name A - Z")) {
             Sort.sortByName(products, 0);
-        } else if (sortType.equals("Product name Z - A")) {
+        } else if (sortType != null && sortType.equals("Product name Z - A")) {
             Sort.sortByName(products, 1);
-        } else if (sortType.equals("Price Highest first")) {
+        } else if (sortType != null && sortType.equals("Price Highest first")) {
             Sort.sortByPrice(products, 1);
-        } else if (sortType.equals("Price Lowest first")) {
+        } else if (sortType != null && sortType.equals("Price Lowest first")) {
             Sort.sortByPrice(products, 0);
         }
 
-        return ok(product.render("get product list by category", categoryName, sortType, products));
+        Integer from = 0;
+        Integer to = Integer.MAX_VALUE;
+        if (null != price) {
+            switch (price) {
+                case "Less than 3000000 đ":
+                    to = 2999999;
+                    break;
+                case "3000000 - 5000000 đ":
+                    from = 3000000;
+                    to = 4999999;
+                    break;
+                case "More than 5000000 đ":
+                    from = 5000000;
+                    break;
+            }
+        }
+
+        List<Product> pl = new ArrayList<>();
+
+        for (Product product : products) {
+            if (product.getPrice() >= from && product.getPrice() <= to) {
+                pl.add(product);
+            }
+
+        }
+
+
+        return ok(product.render("get product list by category", categoryName, sortType, pl.toArray(new Product[pl.size()])));
     }
 
     /**
@@ -78,31 +107,57 @@ public class ProductController extends Controller {
      * @return
      */
     @Transactional
-    public Result guest_SearchProduct(String key, String sortType) {
+    public Result guest_SearchProduct(String key, String sortType, String price) {
         List<Product> productList = productService.getProducts("get all",key);
         Product[] products = productList.toArray(new Product[productList.size()]);
 
-        if (sortType.equals("Product name A - Z")) {
+        if (sortType != null && sortType.equals("Product name A - Z")) {
             Sort.sortByName(products, 0);
-        } else if (sortType.equals("Product name Z - A")) {
+        } else if (sortType != null && sortType.equals("Product name Z - A")) {
             Sort.sortByName(products, 1);
-        } else if (sortType.equals("Price Highest first")) {
+        } else if (sortType != null && sortType.equals("Price Highest first")) {
             Sort.sortByPrice(products, 1);
-        } else if (sortType.equals("Price Lowest first")) {
+        } else if (sortType != null && sortType.equals("Price Lowest first")) {
             Sort.sortByPrice(products, 0);
         }
-        return ok(product.render("search product by key", key, sortType, products));
+
+        Integer from = 0;
+        Integer to = Integer.MAX_VALUE;
+        if (null != price) {
+            switch (price) {
+                case "Less than 3000000 đ":
+                    to = 2999999;
+                    break;
+                case "3000000 - 5000000 đ":
+                    from = 3000000;
+                    to = 4999999;
+                    break;
+                case "More than 5000000 đ":
+                    from = 5000000;
+                    break;
+            }
+        }
+
+        List<Product> pl = new ArrayList<>();
+
+        for (Product product : products) {
+            if (product.getPrice() >= from && product.getPrice() <= to) {
+                pl.add(product);
+            }
+
+        }
+
+        return ok(product.render("search product by key", key, sortType, pl.toArray(new Product[pl.size()])));
     }
 
     /**
      * post method
      * @return
      */
-    @Transactional
     public Result searchProductByForm() {
         DynamicForm form = formFactory.form().bindFromRequest();
         String key = form.get("srchFld");
-        return guest_SearchProduct(key, "");
+        return redirect(routes.ProductController.guest_SearchProduct(key, "", ""));
     }
 
     /**
@@ -113,10 +168,11 @@ public class ProductController extends Controller {
     public Result sortProduct(String title, String categoryName) {
         DynamicForm form = formFactory.form().bindFromRequest();
         String sortType = form.get("sortType");
+        String price = form.get("priceBox");
         if (title.equals("get product list by category"))
-            return guest_ViewProductListByCategory(categoryName, sortType);
+            return guest_ViewProductListByCategory(categoryName, sortType, price);
         else {
-            return guest_SearchProduct(categoryName, sortType);
+            return guest_SearchProduct(categoryName, sortType, price);
         }
     }
 

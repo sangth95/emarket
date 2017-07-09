@@ -7,6 +7,7 @@ import play.db.jpa.Transactional;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Results;
+import security.JWTHandler;
 import services.UserService;
 import views.html.*;
 
@@ -40,7 +41,7 @@ public class LoginController extends Controller{
         }
         LoginInformation loginInformation = loginInformationForm.get();
         if (null != userService.getUser(loginInformation.username, loginInformation.password)) {
-            session().put("username", loginInformation.username);
+            session().put("token", JWTHandler.createToken(loginInformation.username));
             return Results.redirect(routes.AdminProductController.admin_ViewAllProduct());
         } else {
             flash("loginFail", "Email or password is incorrect!");
@@ -54,6 +55,6 @@ public class LoginController extends Controller{
     }
 
     private void removeUserFromSession() {
-        session().remove("username");
+        session().remove("token");
     }
 }

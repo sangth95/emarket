@@ -32,7 +32,7 @@
                     }
 
                     @for(s <- myArray) {
-                      @if(sortType.equals(s)){
+                      @if(s.equals(sortType)){
                         <option selected>@s</option>
                       } else {
                         <option>@s</option>
@@ -42,6 +42,31 @@
                 </select>
               </div>
             </form>
+
+            <form class="form-horizontal span6" action="@routes.ProductController.sortProduct(title, keyword)" method="post">
+              <div class="control-group">
+                <label class="control-label alignL">Price </label>
+                <select name="priceBox" onchange="this.form.submit()" >
+                @defining(new ArrayList[String]()) { myArray =>
+                  @{
+                    myArray.add("Select price")
+                    myArray.add("Less than 3000000 đ")
+                    myArray.add("3000000 - 5000000 đ")
+                    myArray.add("More than 5000000 đ")
+                  }
+
+                  @for(s <- myArray) {
+                    @if(s.equals(sortType)){
+                      <option selected>@s</option>
+                    } else {
+                      <option>@s</option>
+                    }
+                  }
+                }
+                </select>
+              </div>
+            </form>
+
 
             <div id="myTab" class="pull-right">
               <a href="#listView" data-toggle="tab"><span class="btn btn-large"><i class="icon-list"></i></span></a>
@@ -127,20 +152,14 @@
               </div>
             </div>
 
-            <a href="compair.html" class="btn btn-large pull-right">Compair Product</a>
             <div class="pagination">
               <ul>
-                <li><a href="#">&lsaquo;</a></li>
                 <li><a href="#">1</a></li>
                 <li><a href="#">2</a></li>
                 <li><a href="#">3</a></li>
                 <li><a href="#">4</a></li>
-                <li><a href="#">...</a></li>
-                <li><a href="#">&rsaquo;</a></li>
               </ul>
             </div>
             <br class="clr"/>
           </div>
-
-      <!-- MainBody End ============================= -->
 }
