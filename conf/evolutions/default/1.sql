@@ -233,32 +233,6 @@ INSERT INTO role VALUES (3, 'accountant');
 
 
 
-
-INSERT INTO shopping_cart VALUES (1, 'abc', '2017/05/14', 1);
-INSERT INTO shopping_cart VALUES (902, 'truonghongsanglk95@gmail.com', '2017/05/24', 2);
-INSERT INTO shopping_cart VALUES (2, 'truonghongsanglk95@gmail.com', '2017/05/14', 2);
-INSERT INTO shopping_cart VALUES (1002, NULL, NULL, 0);
-INSERT INTO shopping_cart VALUES (1003, NULL, NULL, 0);
-INSERT INTO shopping_cart VALUES (1102, NULL, NULL, 0);
-INSERT INTO shopping_cart VALUES (1202, NULL, NULL, 0);
-INSERT INTO shopping_cart VALUES (1302, NULL, NULL, 0);
-INSERT INTO shopping_cart VALUES (1402, NULL, NULL, 0);
-
-
-
-INSERT INTO shopping_cart_detail VALUES (402, 12, 1, 3590000, 1);
-INSERT INTO shopping_cart_detail VALUES (602, 11, 1, 3590000, 1);
-INSERT INTO shopping_cart_detail VALUES (204, 3, 1, 16478000, 1);
-INSERT INTO shopping_cart_detail VALUES (704, 103, 1, 20380000, 1);
-INSERT INTO shopping_cart_detail VALUES (802, 103, 1, 20380000, 1);
-INSERT INTO shopping_cart_detail VALUES (902, 103, 1, 20380000, 2);
-INSERT INTO shopping_cart_detail VALUES (1002, 2, 1, 13673000, 2);
-INSERT INTO shopping_cart_detail VALUES (1102, 11, 1, 3590000, 902);
-INSERT INTO shopping_cart_detail VALUES (1103, 14, 1, 3849000, 902);
-INSERT INTO shopping_cart_detail VALUES (1203, 5, 1, 4850000, 1003);
-
-
-
 SELECT pg_catalog.setval('shopping_cart_detail_id_seq', 46, true);
 
 
