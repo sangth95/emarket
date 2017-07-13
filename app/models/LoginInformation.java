@@ -11,5 +11,6 @@ public class LoginInformation {
     //@Constraints.Email(message = "Wrong email format!")
     public String username;
     @NotBlank
+    @Constraints.MinLength(5)
     public String password;
 }
