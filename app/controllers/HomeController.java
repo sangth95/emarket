@@ -43,17 +43,17 @@ public class HomeController extends Controller {
 
     //getSpecialOffer
     public Result getSpecialOffer() {
-        return ok(special_offer.render("special offer"));
+        return ok(special_offer.render("Special offer"));
     }
 
     //getDelivery
     public Result guest_ViewDelivery() {
-        return ok(normal.render("view delivery"));
+        return ok(normal.render("View delivery"));
     }
 
     //getContact
     public Result getContact() {
-        return ok(contact.render("contact"));
+        return ok(contact.render("Contact"));
     }
 
 

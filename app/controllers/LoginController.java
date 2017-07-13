@@ -1,6 +1,8 @@
 package controllers;
 
 import models.LoginInformation;
+import models.Role;
+import models.User;
 import play.data.Form;
 import play.data.FormFactory;
 import play.db.jpa.Transactional;
@@ -12,6 +14,7 @@ import services.UserService;
 import views.html.*;
 
 import javax.inject.Inject;
+import java.util.stream.Collectors;
 
 /**
  * Created by An on 5/14/2017.
@@ -40,8 +43,9 @@ public class LoginController extends Controller{
             return loginPage();
         }
         LoginInformation loginInformation = loginInformationForm.get();
-        if (null != userService.getUser(loginInformation.username, loginInformation.password)) {
-            session().put("token", JWTHandler.createToken(loginInformation.username));
+        User user = userService.getUser(loginInformation.username, loginInformation.password);
+        if (null != user) {
+            session().put("token", JWTHandler.createToken(user.getUsername(), user.getRoles().stream().map(Role::getRoleName).collect(Collectors.toList())));
             return Results.redirect(routes.AdminProductController.admin_ViewAllProduct());
         } else {
             flash("loginFail", "Email or password is incorrect!");

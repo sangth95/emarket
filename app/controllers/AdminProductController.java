@@ -58,7 +58,7 @@ public class AdminProductController extends Controller {
     @RestrictByRole({"admin"})
     public Result admin_ViewAllProduct() {
         return ok(admin_product.render(
-                "admin_viewallproduct",
+                "Products - Admin",
                 "",
                 "",
                 productService.getProducts().toArray(new Product[productService.getProducts().size()])));
@@ -70,7 +70,7 @@ public class AdminProductController extends Controller {
      */
     @Transactional
     public Result admin_AddNewProductPage() {
-        return ok(admin_addnewproduct.render("add new product", ""));
+        return ok(admin_addnewproduct.render("New product", ""));
     }
 
     /**
@@ -125,9 +125,9 @@ public class AdminProductController extends Controller {
             //Save image to public directory
             saveImageToPublicDir(filePart);
 
-            return ok(admin_addnewproduct.render("add new product", "Add product successfuly!"));
+            return ok(admin_addnewproduct.render("New product", "Add product successfuly!"));
         }
-        return ok(admin_addnewproduct.render("add new product", "Add product fail!"));
+        return ok(admin_addnewproduct.render("New product", "Add product fail!"));
     }
 
     /**
@@ -137,7 +137,7 @@ public class AdminProductController extends Controller {
      */
     @Transactional
     public Result admin_UpdateProductPage(int product_id) {
-        return ok(admin_updateproduct.render("update product", productService.getProduct(product_id), ""));
+        return ok(admin_updateproduct.render("Update product", productService.getProduct(product_id), ""));
     }
 
     @Transactional
@@ -182,7 +182,7 @@ public class AdminProductController extends Controller {
         if (null != product)
             productService.updateProduct(product_id, product);
 
-        return ok(admin_updateproduct.render("update product", productService.getProduct(product_id), "Update product successfully!"));
+        return ok(admin_updateproduct.render("Update product", productService.getProduct(product_id), "Update product successfully!"));
     }
 
     private void saveImageToPublicDir(Http.MultipartFormData.FilePart filePart) {
@@ -277,7 +277,7 @@ public class AdminProductController extends Controller {
         Row firstRow = sheet.createRow(rowCount++);
         int col = 0;
         Cell cell = firstRow.createCell(col++);
-        cell.setCellValue("Mã");
+        cell.setCellValue("STT");
         cell = firstRow.createCell(col++);
         cell.setCellValue("Tên");
         cell = firstRow.createCell(col++);
@@ -296,7 +296,7 @@ public class AdminProductController extends Controller {
             Row row = sheet.createRow(rowCount++);
             col = 0;
             cell = row.createCell(col++);
-            cell.setCellValue(product.getId());
+            cell.setCellValue(rowCount-1);
             cell = row.createCell(col++);
             cell.setCellValue(product.getName());
             cell = row.createCell(col++);

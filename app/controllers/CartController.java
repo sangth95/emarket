@@ -58,7 +58,7 @@ public class CartController extends Controller{
         int currentCartIdStr = Integer.parseInt(session("currentCartId"));
         ShoppingCart currentShoppingCart = cartService.getShoppingCart(currentCartIdStr);
         List<ShoppingCartDetail> shoppingCartDetailList = cartService.getShoppingCartDetail(currentCartIdStr);
-        return ok(shopping_cart.render("cart", currentShoppingCart, shoppingCartDetailList.toArray(new ShoppingCartDetail[shoppingCartDetailList.size()])));
+        return ok(shopping_cart.render("Cart", currentShoppingCart, shoppingCartDetailList.toArray(new ShoppingCartDetail[shoppingCartDetailList.size()])));
     }
 
 
@@ -115,7 +115,7 @@ public class CartController extends Controller{
 
             cartService.updateShoppingCart(currentCart);
 
-            return ok(order_result.render("order result", inputName, inputAddress, inputPhoneNumber, currentCart));
+            return ok(order_result.render("Order results", inputName, inputAddress, inputPhoneNumber, currentCart));
         }
     }
 

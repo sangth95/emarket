@@ -65,6 +65,7 @@ POST    /admin/update_product       controllers.AdminProductController.admin_Upd
 GET     /api/products/:id           controllers.ProductServiceController.getProduct(id: Integer)
 GET     /api/products               controllers.ProductServiceController.getProducts()
 GET     /api/products/byCategory    controllers.ProductServiceController.getProductByCategory(categoryName: String, sortType: String)
+GET     /api/search                 controllers.ProductServiceController.searchProducts(key: String)
 
 #Export
 GET     /admin/export/products      controllers.AdminProductController.exportProducts()

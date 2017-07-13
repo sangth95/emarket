@@ -19,6 +19,10 @@ public class ProductService {
         this.productDao = productDao;
     }
 
+    public List<Product> searchProduct(String key) {
+        return productDao.search(key);
+    }
+
     public List<Product> getProducts() {
         return this.productDao.getProductList();
     }

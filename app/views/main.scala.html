@@ -31,9 +31,88 @@
         <script type="text/javascript" src="@routes.Assets.versioned("themes/js/jquery-3.2.1.min.js")"></script>
         <script type="text/javascript" src='@routes.CartController.javascriptRoutes()'></script>
         <script type="text/javascript" src="@routes.Assets.versioned("themes/js/main.js")"></script>
-    </head>
+        <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.10.4/typeahead.bundle.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.4/handlebars.js"></script>
 
-    <script>
+        <style type="text/css">
+                #scrollable-dropdown-menu .tt-dropdown-menu {
+                    max-height: 700px;
+                    overflow-y: auto;
+                }
+                .typeahead, .tt-query, .tt-hint {
+                    margin-left: 50px;
+                    border: 2px solid #CCCCCC;
+                    font-size: 24px;
+                    line-height: 30px;
+                    outline: medium none;
+                    width: 396px;
+                }
+                .typeahead {
+                    margin-left: 50px;
+                    margin-top: 15px;
+                    background-color: #FFFFFF;
+                }
+                .typeahead:focus {
+                    border: 2px solid #0097CF;
+                }
+                .tt-query {
+                    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+                }
+                .tt-hint {
+                    color: #999999;
+                }
+                .tt-dropdown-menu {
+                    margin-left: 50px;
+                    background-color: #FFFFFF;
+                    border: 1px solid rgba(0, 0, 0, 0.2);
+                    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+                    margin-top: 0px;
+                    padding: 0px 0;
+                    width: 422px;
+                }
+                .tt-suggestion {
+                    font-size: 18px;
+                    padding: 0px 0px;
+                }
+                .tt-suggestion.tt-cursor {
+                    background-color: #0097CF;
+                    color: #FFFFFF;
+                }
+                .tt-suggestion p {
+                    margin: 0;
+                }
+                .gist {
+                    font-size: 14px;
+                }
+                .example-twitter-oss .tt-suggestion {
+                    padding: 8px 20px;
+                }
+                .example-twitter-oss .tt-suggestion + .tt-suggestion {
+                    border-top: 1px solid #CCCCCC;
+                }
+                .example-twitter-oss .repo-language {
+                    float: right;
+                    font-style: italic;
+                }
+                .example-twitter-oss .repo-name {
+                    font-weight: bold;
+                }
+                .example-twitter-oss .repo-description {
+                    font-size: 14px;
+                }
+                .example-sports .league-name {
+                    border-bottom: 1px solid #CCCCCC;
+                    margin: 0 20px 5px;
+                    padding: 3px 0;
+                }
+                .example-arabic .tt-dropdown-menu {
+                    text-align: right;
+                }
+        </style>
+
+
+    </head>
+    <script type='text/javascript'>
         $(document).ready(function () {
             function addToCart(id) {
                 $.ajax({
@@ -75,18 +154,43 @@
                     </a>
                     <div class="navbar-inner">
                         <a class="brand" href="@routes.HomeController.index()"><img src="@routes.Assets.versioned("themes/images/logo.png")" alt="Bootsshop"/></a>
-                        <form class="form-inline navbar-search" method="post" action="@routes.ProductController.searchProductByForm()" >
-                            <input id="srchFld" name="srchFld" class="srchTxt" type="text" />
-                            <select class="srchTxt">
-                                <option>All</option>
-                                <option>SASA </option>
-                                <option>FOOD AND BEVERAGES </option>
-                                <option>HEALTH & BEAUTY </option>
-                                <option>SPORTS & LEISURE </option>
-                                <option>BOOKS & ENTERTAINMENTS </option>
-                            </select>
-                            <button type="submit" id="submitButton" class="btn btn-primary">Go</button>
-                        </form>
+                        <div id="scrollable-dropdown-menu"><input placeholder="Search" class="typeahead"></input>
+                            <script type="text/javascript" src="http://code.jquery.com/jquery-3.2.1.js"></script>
+                            <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.10.4/typeahead.bundle.min.js"></script>
+                            <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.4/handlebars.js"></script>
+                            <script type='text/javascript'>
+                                    // Instantiate the Bloodhound suggestion engine
+                                    var movies = new Bloodhound({
+                                        datumTokenizer: function (datum) {
+                                            return Bloodhound.tokenizers.whitespace(datum.value);
+                                        },
+                                        queryTokenizer: Bloodhound.tokenizers.whitespace,
+                                        remote: {
+                                            url: '@routes.ProductServiceController.searchProducts("")%QUERY',
+                                            filter: function (movies) {
+                                                return $.map(movies, function (movie) {
+                                                    return {
+                                                        id: movie.id,
+                                                        value: movie.name
+                                                    };
+                                                });
+                                            }
+                                        },
+                                        limit: 10
+                                    });
+                                    // Initialize the Bloodhound suggestion engine
+                                    movies.initialize();
+                                    // Instantiate the Typeahead UI
+                                    $('#scrollable-dropdown-menu .typeahead').typeahead(null, {
+                                        displayKey: 'value',
+                                        source: movies.ttAdapter(),
+                                        templates: {
+                                            suggestion: Handlebars.compile("<a href='http://localhost:9000/product/{{id}}')>{{value}}</a>"),
+                                            footer: Handlebars.compile("<a href='http://localhost:9000/products/search/{{query}}?sortType=&price='>More results for '{{query}}'</a>")
+                                        }
+                                    });
+                            </script>
+
                         <ul id="topMenu" class="nav pull-right">
                             <li class=""><a href="@routes.HomeController.getSpecialOffer()">Specials Offer</a></li>
                             <li class=""><a href="@routes.HomeController.guest_ViewDelivery()">Delivery</a></li>

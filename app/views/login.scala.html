@@ -3,6 +3,9 @@
 
 <!DOCTYPE html>
 <html>
+    <header>
+        <title>@title</title>
+    </header>
 <style>
 form {
     border: 3px solid #f1f1f1;
@@ -18,7 +21,7 @@ input[type=text], input[type=password] {
 }
 
 button {
-    background-color: #4CAF50;
+    background-color: #784626;
     color: white;
     padding: 14px 20px;
     margin: 8px 0;
@@ -39,7 +42,8 @@ button:hover {
 </style>
 <body>
 
-<h2>Login Form</h2>
+    <div style="padding-top: 50px;padding-left: 500px;padding-right: 500px">
+<h2>Login</h2>
 
     @if(flash.containsKey("loginFail")) {
         <div class="alert-message">
@@ -49,7 +53,7 @@ button:hover {
 
     @helper.form(routes.LoginController.login()) {
         <div class="container">
-            <label><b>Email</b></label>
+            <label><b>Username</b></label>
             <input type="text" placeholder="Enter Email" name="@{loginInformationForm("username").label}" value="@{loginInformationForm("username").value}" required>
 
             <label><b>Password</b></label>
@@ -59,5 +63,6 @@ button:hover {
         </div>
         }
 
+    </div>
 </body>
 </html>

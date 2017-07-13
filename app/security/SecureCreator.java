@@ -35,12 +35,7 @@ public class SecureCreator implements play.http.ActionCreator {
                 if (null != r) {
                     List<String> roles = Arrays.asList(r.value());
                     User user = userService.getUser(getUsername(ctx));
-                    List<String> userRoles = Optional.ofNullable(user)
-                            .map(User::getRoles)
-                            .orElse(Collections.emptyList())
-                            .stream()
-                            .map(Role::getRoleName)
-                            .collect(Collectors.toList());
+                    List<String> userRoles = getRoles(ctx);
 
                     if (CollectionUtils.containsAny(roles, userRoles)) {
                         ctx.args.put("user", user);
@@ -61,5 +56,13 @@ public class SecureCreator implements play.http.ActionCreator {
             return null;
         }
         return JWTHandler.getUsernameBaseOnToken(token);
+    }
+
+    private List<String> getRoles(Http.Context ctx) {
+        String token = ctx.session().get("token");
+        if (null == token) {
+            return null;
+        }
+        return JWTHandler.getRolesBaseOnToken(token);
     }
 }
