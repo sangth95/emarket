@@ -101,9 +101,11 @@ public class ProductDao {
     }
 
     public List<Product> search(String key) {
-        Query query = jpaApi.em().createNamedQuery("Product.getByText", Product.class)
+        return jpaApi.withTransaction(() -> {
+                Query query = jpaApi.em().createNamedQuery("Product.getByText", Product.class)
                 .setParameter("keyword", "%" + key + "%");
-        List<Product> productList = query.getResultList();
-        return productList;
+        return query.getResultList();
+
+        });
     }
 }

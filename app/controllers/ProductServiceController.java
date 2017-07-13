@@ -58,11 +58,12 @@ public class ProductServiceController extends Controller {
     }
 
     @Transactional
-    public Result searchProducts(String key) {
-        List<Product> productList = productService.searchProduct(key);
-        if (productList.size() > 5)
-            productList = productList.subList(0, 6);
-        Product[] products = productList.toArray(new Product[productList.size()]);
-        return ok(Json.toJson(products));
+    public CompletionStage<Result> searchProducts(String key) {
+        return CompletableFuture.supplyAsync(() -> {
+            List<Product> productList = productService.searchProduct(key);
+            if (productList.size() > 5)
+                productList = productList.subList(0, 6);
+            return productList.toArray(new Product[productList.size()]);
+        }).thenApply(products -> ok(Json.toJson(products)));
     }
 }
